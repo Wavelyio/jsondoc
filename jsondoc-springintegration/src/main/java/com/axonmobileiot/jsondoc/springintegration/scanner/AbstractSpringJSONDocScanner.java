@@ -19,9 +19,9 @@ import com.axonmobileiot.jsondoc.core.util.JSONDocUtils;
 import com.axonmobileiot.jsondoc.springintegration.scanner.builder.*;
 import org.reflections.Reflections;
 import org.springframework.beans.BeanUtils;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.util.*;
 
@@ -31,7 +31,7 @@ public abstract class AbstractSpringJSONDocScanner extends AbstractJSONDocScanne
 	public Set<Method> jsondocMethods(Class<?> controller) {
 		Set<Method> annotatedMethods = new LinkedHashSet<>();
 		for (Method method : controller.getDeclaredMethods()) {
-			if (SpringBuilderUtils.isAnnotated(method, RequestMapping.class)) {
+			if (SpringBuilderUtils.isAnnotatedWithAny(method, this.mappingAnnotations())) {
 				annotatedMethods.add(method);
 			}
 		}
@@ -131,27 +131,6 @@ public abstract class AbstractSpringJSONDocScanner extends AbstractJSONDocScanne
 		}
 
 		return candidates;
-	}
-
-	private void appendSubCandidates(Class<?> clazz, Set<Class<?>> subCandidates, Reflections reflections) {
-		if(clazz.isPrimitive() || clazz.equals(Class.class)) {
-			return;
-		}
-
-		for (Field field : clazz.getDeclaredFields()) {
-			Class<?> fieldClass = field.getType();
-			Set<Class<?>> fieldCandidates = new HashSet<>();
-			buildJSONDocObjectsCandidates(fieldCandidates, fieldClass, field.getGenericType(), reflections);
-
-			for(Class<?> candidate: fieldCandidates) {
-				if(!subCandidates.contains(candidate)) {
-					subCandidates.add(candidate);
-
-
-					appendSubCandidates(candidate, subCandidates, reflections);
-				}
-			}
-		}
 	}
 
 	@Override
@@ -285,5 +264,28 @@ public abstract class AbstractSpringJSONDocScanner extends AbstractJSONDocScanne
 	public Set<Class<?>> jsondocMigrations() {
 		return reflections.getTypesAnnotatedWith(ApiMigrationSet.class, true);
 	}
+
+    protected abstract Set<Class<? extends Annotation>> mappingAnnotations();
+
+    private void appendSubCandidates(Class<?> clazz, Set<Class<?>> subCandidates, Reflections reflections) {
+        if(clazz.isPrimitive() || clazz.equals(Class.class)) {
+            return;
+        }
+
+        for (Field field : clazz.getDeclaredFields()) {
+            Class<?> fieldClass = field.getType();
+            Set<Class<?>> fieldCandidates = new HashSet<>();
+            buildJSONDocObjectsCandidates(fieldCandidates, fieldClass, field.getGenericType(), reflections);
+
+            for(Class<?> candidate: fieldCandidates) {
+                if(!subCandidates.contains(candidate)) {
+                    subCandidates.add(candidate);
+
+
+                    appendSubCandidates(candidate, subCandidates, reflections);
+                }
+            }
+        }
+    }
 
 }

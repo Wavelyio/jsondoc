@@ -4,47 +4,28 @@ import org.springframework.core.annotation.AnnotatedElementUtils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Set;
 
 public class SpringBuilderUtils {
 
     public static boolean isAnnotated(Class<?> clazz, Class<? extends Annotation> annotation) {
-        try {
-            Class.forName("org.springframework.core.annotation.AnnotatedElementUtils");
-            return AnnotatedElementUtils.isAnnotated(clazz, annotation);
-
-        } catch (ClassNotFoundException e) {
-            return clazz.isAnnotationPresent(annotation);
-        }
+        return AnnotatedElementUtils.isAnnotated(clazz, annotation);
     }
 
     public static boolean isAnnotated(Method method, Class<? extends Annotation> annotation) {
-        try {
-            Class.forName("org.springframework.core.annotation.AnnotatedElementUtils");
-            return AnnotatedElementUtils.isAnnotated(method, annotation);
+        return AnnotatedElementUtils.isAnnotated(method, annotation);
+    }
 
-        } catch (ClassNotFoundException e) {
-            return method.isAnnotationPresent(annotation);
-        }
+    public static boolean isAnnotatedWithAny(Method method, Set<Class<? extends Annotation>> annotations) {
+        return annotations.stream().anyMatch(annotation -> SpringBuilderUtils.isAnnotated(method, annotation));
     }
 
     public static <T extends Annotation> T getAnnotation(Class<?> clazz, Class<T> annotation) {
-        try {
-            Class.forName("org.springframework.core.annotation.AnnotatedElementUtils");
-            return AnnotatedElementUtils.getMergedAnnotation(clazz, annotation);
-
-        } catch (ClassNotFoundException e) {
-            return clazz.getAnnotation(annotation);
-        }
+        return AnnotatedElementUtils.getMergedAnnotation(clazz, annotation);
     }
 
     public static <T extends Annotation> T getAnnotation(Method method, Class<T> annotation) {
-        try {
-            Class.forName("org.springframework.core.annotation.AnnotatedElementUtils");
-            return AnnotatedElementUtils.getMergedAnnotation(method, annotation);
-
-        } catch (ClassNotFoundException e) {
-            return method.getAnnotation(annotation);
-        }
+        return AnnotatedElementUtils.getMergedAnnotation(method, annotation);
     }
 
 }
