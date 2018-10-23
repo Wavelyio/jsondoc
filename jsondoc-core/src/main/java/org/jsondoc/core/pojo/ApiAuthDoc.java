@@ -12,12 +12,12 @@ public class ApiAuthDoc {
 	private String type;
 
 	// Basic auth
-	private List<String> roles = new ArrayList<String>();
-	private Map<String, String> testusers = new HashMap<String, String>();
+	private List<String> roles = new ArrayList<>();
+	private Map<String, String> testusers = new HashMap<>();
 
 	// Token auth
 	private String scheme;
-	private Set<String> testtokens = new HashSet<String>();
+	private Set<String> testtokens = new HashSet<>();
 
 	public String getType() {
 		return type;

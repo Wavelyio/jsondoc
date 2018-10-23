@@ -1,9 +1,8 @@
 package org.jsondoc.core.pojo.global;
 
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
-
-import com.google.common.collect.Sets;
 
 public class ApiGlobalDoc {
 	public final String jsondocId = UUID.randomUUID().toString();
@@ -15,7 +14,7 @@ public class ApiGlobalDoc {
 	private ApiMigrationsDoc migrationset;
 
 	public ApiGlobalDoc() {
-		this.sections = Sets.newLinkedHashSet();
+		this.sections = new LinkedHashSet<>();
 		this.changelogset = new ApiChangelogsDoc();
 		this.migrationset = new ApiMigrationsDoc();
 	}

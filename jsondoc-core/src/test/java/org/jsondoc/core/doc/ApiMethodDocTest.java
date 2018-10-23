@@ -2,10 +2,11 @@ package org.jsondoc.core.doc;
 
 import org.jsondoc.core.pojo.ApiMethodDoc;
 import org.jsondoc.core.pojo.ApiVerb;
-import org.junit.Assert;
-import org.junit.Test;
 
-import com.google.common.collect.Sets;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import java.util.Set;
 
 public class ApiMethodDocTest {
 
@@ -15,52 +16,52 @@ public class ApiMethodDocTest {
 	@Test
 	public void testNotEqual() {
 		first = new ApiMethodDoc();
-		first.setPath(Sets.newHashSet("/first"));
-		first.setVerb(Sets.newHashSet(ApiVerb.GET));
+		first.setPath(Set.of("/first"));
+		first.setVerb(Set.of(ApiVerb.GET));
 		second = new ApiMethodDoc();
-		second.setPath(Sets.newHashSet("/second"));
-		second.setVerb(Sets.newHashSet(ApiVerb.GET));
-		Assert.assertNotEquals(0, first.compareTo(second));
+		second.setPath(Set.of("/second"));
+		second.setVerb(Set.of(ApiVerb.GET));
+        Assertions.assertNotEquals(0, first.compareTo(second));
 	}
 
 	@Test
 	public void testEqual() {
 		first = new ApiMethodDoc();
-		first.setPath(Sets.newHashSet("/test"));
-		first.setVerb(Sets.newHashSet(ApiVerb.GET));
+		first.setPath(Set.of("/test"));
+		first.setVerb(Set.of(ApiVerb.GET));
 		second = new ApiMethodDoc();
-		second.setPath(Sets.newHashSet("/test"));
-		second.setVerb(Sets.newHashSet(ApiVerb.GET));
-		Assert.assertEquals(0, first.compareTo(second));
+		second.setPath(Set.of("/test"));
+		second.setVerb(Set.of(ApiVerb.GET));
+        Assertions.assertEquals(0, first.compareTo(second));
 	}
 	
 	@Test
 	public void testNotEqualMultipleVerbs() {
 		first = new ApiMethodDoc();
-		first.setPath(Sets.newHashSet("/first"));
-		first.setVerb(Sets.newHashSet(ApiVerb.GET, ApiVerb.POST));
+		first.setPath(Set.of("/first"));
+		first.setVerb(Set.of(ApiVerb.GET, ApiVerb.POST));
 		second = new ApiMethodDoc();
-		second.setPath(Sets.newHashSet("/second"));
-		second.setVerb(Sets.newHashSet(ApiVerb.GET, ApiVerb.POST));
-		Assert.assertNotEquals(0, first.compareTo(second));
+		second.setPath(Set.of("/second"));
+		second.setVerb(Set.of(ApiVerb.GET, ApiVerb.POST));
+        Assertions.assertNotEquals(0, first.compareTo(second));
 		
-		second.setPath(Sets.newHashSet("/first"));
-		second.setVerb(Sets.newHashSet(ApiVerb.PUT, ApiVerb.POST));
-		Assert.assertNotEquals(0, first.compareTo(second));
+		second.setPath(Set.of("/first"));
+		second.setVerb(Set.of(ApiVerb.PUT, ApiVerb.POST));
+        Assertions.assertNotEquals(0, first.compareTo(second));
 	}
 	
 	@Test
 	public void testEqualMultipleVerbs() {
 		first = new ApiMethodDoc();
-		first.setPath(Sets.newHashSet("/test"));
-		first.setVerb(Sets.newHashSet(ApiVerb.GET, ApiVerb.POST));
+		first.setPath(Set.of("/test"));
+		first.setVerb(Set.of(ApiVerb.GET, ApiVerb.POST));
 		second = new ApiMethodDoc();
-		second.setPath(Sets.newHashSet("/test"));
-		second.setVerb(Sets.newHashSet(ApiVerb.GET, ApiVerb.POST));
-		Assert.assertEquals(0, first.compareTo(second));
+		second.setPath(Set.of("/test"));
+		second.setVerb(Set.of(ApiVerb.GET, ApiVerb.POST));
+        Assertions.assertEquals(0, first.compareTo(second));
 		
-		second.setVerb(Sets.newHashSet(ApiVerb.POST, ApiVerb.GET));
-		Assert.assertEquals(0, first.compareTo(second));
+		second.setVerb(Set.of(ApiVerb.POST, ApiVerb.GET));
+        Assertions.assertEquals(0, first.compareTo(second));
 	}
 
 }

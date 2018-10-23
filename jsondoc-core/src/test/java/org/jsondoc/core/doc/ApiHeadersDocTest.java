@@ -9,10 +9,11 @@ import org.jsondoc.core.pojo.ApiMethodDoc;
 import org.jsondoc.core.pojo.JSONDoc.MethodDisplay;
 import org.jsondoc.core.scanner.DefaultJSONDocScanner;
 import org.jsondoc.core.scanner.JSONDocScanner;
-import org.junit.Assert;
-import org.junit.Test;
 
-import com.google.common.collect.Sets;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import java.util.Set;
 
 public class ApiHeadersDocTest {
 	
@@ -47,14 +48,14 @@ public class ApiHeadersDocTest {
 	
 	@Test
 	public void testApiHeadersOnClass() {
-		final ApiDoc apiDoc = jsondocScanner.getApiDocs(Sets.<Class<?>>newHashSet(ApiHeadersController.class), MethodDisplay.URI).iterator().next();
-		Assert.assertEquals("ApiHeadersController", apiDoc.getName());
+		final ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(ApiHeadersController.class), MethodDisplay.URI).iterator().next();
+		Assertions.assertEquals("ApiHeadersController", apiDoc.getName());
 		for (ApiMethodDoc apiMethodDoc : apiDoc.getMethods()) {
 			if(apiMethodDoc.getPath().contains("/api-headers-controller-method-one")) {
-				Assert.assertEquals(2, apiMethodDoc.getHeaders().size());
+				Assertions.assertEquals(2, apiMethodDoc.getHeaders().size());
 			}
 			if(apiMethodDoc.getPath().contains("/api-headers-controller-method-two")) {
-				Assert.assertEquals(3, apiMethodDoc.getHeaders().size());
+				Assertions.assertEquals(3, apiMethodDoc.getHeaders().size());
 			}
 		}
 	}

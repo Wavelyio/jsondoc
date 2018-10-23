@@ -8,10 +8,11 @@ import org.jsondoc.core.pojo.ApiMethodDoc;
 import org.jsondoc.core.pojo.JSONDoc.MethodDisplay;
 import org.jsondoc.core.scanner.DefaultJSONDocScanner;
 import org.jsondoc.core.scanner.JSONDocScanner;
-import org.junit.Assert;
-import org.junit.Test;
 
-import com.google.common.collect.Sets;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import java.util.Set;
 
 public class JSONDocApiAuthBuilderTest {
 	
@@ -36,21 +37,21 @@ public class JSONDocApiAuthBuilderTest {
 	
 	@Test
 	public void testApiAuthToken() {
-		ApiDoc apiDoc = jsondocScanner.getApiDocs(Sets.<Class<?>> newHashSet(Controller.class), MethodDisplay.URI).iterator().next();
-		Assert.assertEquals("TOKEN", apiDoc.getAuth().getType());
-		Assert.assertEquals("", apiDoc.getAuth().getScheme());
-		Assert.assertEquals("abc", apiDoc.getAuth().getTesttokens().iterator().next());
+		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(Controller.class), MethodDisplay.URI).iterator().next();
+		Assertions.assertEquals("TOKEN", apiDoc.getAuth().getType());
+		Assertions.assertEquals("", apiDoc.getAuth().getScheme());
+		Assertions.assertEquals("abc", apiDoc.getAuth().getTesttokens().iterator().next());
 		
 		for (ApiMethodDoc apiMethodDoc : apiDoc.getMethods()) {
 			if(apiMethodDoc.getPath().contains("/inherit")) {
-				Assert.assertEquals("TOKEN", apiMethodDoc.getAuth().getType());
-				Assert.assertEquals("", apiMethodDoc.getAuth().getScheme());
-				Assert.assertEquals("abc", apiMethodDoc.getAuth().getTesttokens().iterator().next());
+				Assertions.assertEquals("TOKEN", apiMethodDoc.getAuth().getType());
+				Assertions.assertEquals("", apiMethodDoc.getAuth().getScheme());
+				Assertions.assertEquals("abc", apiMethodDoc.getAuth().getTesttokens().iterator().next());
 			}
 			if(apiMethodDoc.getPath().contains("/override")) {
-				Assert.assertEquals("TOKEN", apiMethodDoc.getAuth().getType());
-				Assert.assertEquals("Bearer", apiMethodDoc.getAuth().getScheme());
-				Assert.assertEquals("xyz", apiMethodDoc.getAuth().getTesttokens().iterator().next());
+				Assertions.assertEquals("TOKEN", apiMethodDoc.getAuth().getType());
+				Assertions.assertEquals("Bearer", apiMethodDoc.getAuth().getScheme());
+				Assertions.assertEquals("xyz", apiMethodDoc.getAuth().getTesttokens().iterator().next());
 			}
 		}
 		

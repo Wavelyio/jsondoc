@@ -6,8 +6,6 @@ import java.util.UUID;
 
 import org.jsondoc.core.util.JSONDocType;
 
-import com.google.common.base.Joiner;
-
 public class ApiObjectFieldDoc extends AbstractDoc implements Comparable<ApiObjectFieldDoc> {
 	public final String jsondocId = UUID.randomUUID().toString();
 	private JSONDocType jsondocType;
@@ -20,7 +18,7 @@ public class ApiObjectFieldDoc extends AbstractDoc implements Comparable<ApiObje
 	private Integer order;
 
 	public ApiObjectFieldDoc() {
-		this.format = new LinkedHashSet<String>();
+		this.format = new LinkedHashSet<>();
 	}
 
 	public String[] getAllowedvalues() {
@@ -36,7 +34,7 @@ public class ApiObjectFieldDoc extends AbstractDoc implements Comparable<ApiObje
 	}
 	
 	public String getDisplayedFormat() {
-		return Joiner.on(", ").join(format);
+		return String.join(", ", format);
 	}
 
 	public void setFormat(Set<String> format) {
@@ -113,10 +111,13 @@ public class ApiObjectFieldDoc extends AbstractDoc implements Comparable<ApiObje
 			return false;
 		ApiObjectFieldDoc other = (ApiObjectFieldDoc) obj;
 		if (name == null) {
-			if (other.name != null)
+			if (other.name != null){
 				return false;
-		} else if (!name.equals(other.name))
+			}
+
+		} else if (!name.equals(other.name)){
 			return false;
+		}
 		return true;
 	}
 

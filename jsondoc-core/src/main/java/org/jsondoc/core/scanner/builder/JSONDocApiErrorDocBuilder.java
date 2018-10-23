@@ -8,9 +8,6 @@ import org.jsondoc.core.annotation.ApiError;
 import org.jsondoc.core.annotation.ApiErrors;
 import org.jsondoc.core.pojo.ApiErrorDoc;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.FluentIterable;
-
 public class JSONDocApiErrorDocBuilder {
 	
 	public static List<ApiErrorDoc> build(Method method) {
@@ -27,13 +24,7 @@ public class JSONDocApiErrorDocBuilder {
 
 		if(typeAnnotation != null) {
 			for (final ApiError apiError : typeAnnotation.apierrors()) {
-
-				boolean isAlreadyDefined = FluentIterable.from(apiMethodDocs).anyMatch(new Predicate<ApiErrorDoc>() {
-					@Override
-					public boolean apply(ApiErrorDoc apiErrorDoc) {
-						return apiError.code().equals(apiErrorDoc.getCode());
-					};
-				});
+				boolean isAlreadyDefined = apiMethodDocs.stream().anyMatch(doc -> apiError.code().equals(doc.getCode()));
 
 				if (!isAlreadyDefined) {
 					apiMethodDocs.add(new ApiErrorDoc(apiError.code(), apiError.description()));

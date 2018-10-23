@@ -6,7 +6,7 @@ import org.jsondoc.core.pojo.ApiParamDoc;
 import org.jsondoc.core.pojo.ApiVerb;
 import org.jsondoc.core.pojo.JSONDoc.MethodDisplay;
 
-import com.google.common.collect.Sets;
+import java.util.Set;
 
 public class JSONDocApiMethodDocValidator {
 	
@@ -33,7 +33,7 @@ public class JSONDocApiMethodDocValidator {
 		final String MESSAGE_MISSING_METHOD_SUMMARY			= "Missing documentation data: summary";
 		
 		if(apiMethodDoc.getPath().isEmpty()) {
-			apiMethodDoc.setPath(Sets.newHashSet(ERROR_MISSING_METHOD_PATH));
+			apiMethodDoc.setPath(Set.of(ERROR_MISSING_METHOD_PATH));
 			apiMethodDoc.addJsondocerror(ERROR_MISSING_METHOD_PATH);
 		}
 		

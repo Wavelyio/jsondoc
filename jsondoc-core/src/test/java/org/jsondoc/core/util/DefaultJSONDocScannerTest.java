@@ -1,9 +1,8 @@
 package org.jsondoc.core.util;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.jsondoc.core.pojo.ApiDoc;
@@ -13,13 +12,14 @@ import org.jsondoc.core.pojo.JSONDoc;
 import org.jsondoc.core.pojo.JSONDoc.MethodDisplay;
 import org.jsondoc.core.scanner.DefaultJSONDocScanner;
 import org.jsondoc.core.scanner.JSONDocScanner;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DefaultJSONDocScannerTest {
     private String version = "1.0";
@@ -31,7 +31,7 @@ public class DefaultJSONDocScannerTest {
     @Test
     public void getJSONDoc() throws IOException {
     	JSONDocScanner jsondocScanner = new DefaultJSONDocScanner();
-        JSONDoc jsondoc = jsondocScanner.getJSONDoc(version, basePath, Lists.newArrayList("org.jsondoc.core.util"), true, MethodDisplay.URI);
+        JSONDoc jsondoc = jsondocScanner.getJSONDoc(version, basePath, List.of("org.jsondoc.core.util"), true, MethodDisplay.URI);
         assertEquals(1, jsondoc.getApis().size());
 
         int countApis = 0;
@@ -61,14 +61,14 @@ public class DefaultJSONDocScannerTest {
     }
 
     private Set<ApiVerb> getAllTestedApiVerbs(JSONDoc jsondoc) {
-        Set<ApiVerb> apiVerbs = new HashSet<ApiVerb>();
+        Set<ApiVerb> apiVerbs = new HashSet<>();
 
         for (String string : jsondoc.getObjects().keySet()) {
             Set<ApiDoc> apiDocs = jsondoc.getApis().get(string);
             if (apiDocs != null) {
                 for (ApiDoc doc : apiDocs) {
                     for (ApiMethodDoc apiMethodDoc : doc.getMethods()) {
-                        apiVerbs.addAll(Sets.newHashSet(apiMethodDoc.getVerb()));
+                        apiVerbs.addAll(apiMethodDoc.getVerb());
                     }
                 }
             }

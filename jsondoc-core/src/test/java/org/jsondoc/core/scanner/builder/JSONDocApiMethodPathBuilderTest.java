@@ -3,16 +3,13 @@ package org.jsondoc.core.scanner.builder;
 import org.jsondoc.core.annotation.Api;
 import org.jsondoc.core.annotation.ApiMethod;
 import org.jsondoc.core.pojo.ApiDoc;
-import org.jsondoc.core.pojo.ApiMethodDoc;
 import org.jsondoc.core.pojo.JSONDoc.MethodDisplay;
 import org.jsondoc.core.scanner.DefaultJSONDocScanner;
 import org.jsondoc.core.scanner.JSONDocScanner;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.FluentIterable;
-import com.google.common.collect.Sets;
+import java.util.Set;
 
 public class JSONDocApiMethodPathBuilderTest {
 
@@ -30,40 +27,26 @@ public class JSONDocApiMethodPathBuilderTest {
 
 	@Test
 	public void testPathWithMethodDisplayURI() {
-		ApiDoc apiDoc = jsondocScanner.getApiDocs(Sets.<Class<?>> newHashSet(Controller.class), MethodDisplay.URI).iterator().next();
 
-		boolean allRight = FluentIterable.from(apiDoc.getMethods()).anyMatch(new Predicate<ApiMethodDoc>() {
-			@Override
-			public boolean apply(ApiMethodDoc input) {
-				return 
-						input.getPath().contains("/path1") && 
-						input.getPath().contains("/path2") && 
-						input.getDisplayedMethodString().contains("/path1") &&
-						input.getDisplayedMethodString().contains("/path2");
-			}
-			
-		});
-		
-		Assert.assertTrue(allRight);
+		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(Controller.class), MethodDisplay.URI).iterator().next();
+		boolean allRight = apiDoc.getMethods().stream().anyMatch(doc -> doc.getPath().contains("/path1") &&
+							doc.getPath().contains("/path2") &&
+							doc.getDisplayedMethodString().contains("/path1") &&
+							doc.getDisplayedMethodString().contains("/path2"));
+
+		Assertions.assertTrue(allRight);
 	}
 
 	@Test
 	public void testPathWithMethodDisplayMethod() {
-		ApiDoc apiDoc = jsondocScanner.getApiDocs(Sets.<Class<?>> newHashSet(Controller.class), MethodDisplay.METHOD).iterator().next();
-		
-		boolean allRight = FluentIterable.from(apiDoc.getMethods()).anyMatch(new Predicate<ApiMethodDoc>() {
-			@Override
-			public boolean apply(ApiMethodDoc input) {
-				return 
-						input.getPath().contains("/path1") && 
-						input.getPath().contains("/path2") && 
-						input.getDisplayedMethodString().contains("path") &&
-						!input.getDisplayedMethodString().contains("/path1");
-			}
-			
-		});
-		
-		Assert.assertTrue(allRight);
+		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(Controller.class), MethodDisplay.METHOD).iterator().next();
+
+		boolean allRight = apiDoc.getMethods().stream().anyMatch(doc -> doc.getPath().contains("/path1") &&
+                doc.getPath().contains("/path2") &&
+                doc.getDisplayedMethodString().contains("path") &&
+                !doc.getDisplayedMethodString().contains("/path1"));
+
+		Assertions.assertTrue(allRight);
 	}
 
 }

@@ -76,7 +76,7 @@ public abstract class AbstractJSONDocScanner implements JSONDocScanner {
 	 * @return An <code>ApiDoc</code> object
 	 */
 	public JSONDoc getJSONDoc(String version, String basePath, List<String> packages, boolean playgroundEnabled, MethodDisplay displayMethodAs) {
-		Set<URL> urls = new HashSet<URL>();
+		Set<URL> urls = new HashSet<>();
 		FilterBuilder filter = new FilterBuilder();
 		
 		log.debug("Found " + packages.size() + " package(s) to scan...");

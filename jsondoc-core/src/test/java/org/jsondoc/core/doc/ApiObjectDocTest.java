@@ -15,8 +15,8 @@ import org.jsondoc.core.pojo.ApiStage;
 import org.jsondoc.core.pojo.ApiVisibility;
 import org.jsondoc.core.scanner.DefaultJSONDocScanner;
 import org.jsondoc.core.scanner.JSONDocScanner;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class ApiObjectDocTest {
 	
@@ -52,7 +52,7 @@ public class ApiObjectDocTest {
 		private Long[] LongArray;
 
 		@ApiObjectField(description="a long array to test https://github.com/fabiomaffioletti/jsondoc/issues/27")
-		private long[] longArray;
+		private long[] primitiveLongArray;
 		
 		@ApiObjectField(name = "foo_bar", description="a property to test https://github.com/fabiomaffioletti/jsondoc/pull/31", required = true)
 		private String fooBar;
@@ -100,9 +100,9 @@ public class ApiObjectDocTest {
 		Set<Class<?>> classes = new HashSet<Class<?>>();
 		classes.add(UndefinedVisibilityAndStage.class);
 		ApiObjectDoc apiObjectDoc = jsondocScanner.getApiObjectDocs(classes).iterator().next();
-		Assert.assertEquals("undefinedvisibilityandstage", apiObjectDoc.getName());
-		Assert.assertEquals(ApiVisibility.UNDEFINED, apiObjectDoc.getVisibility());
-		Assert.assertEquals(ApiStage.UNDEFINED, apiObjectDoc.getStage());
+		Assertions.assertEquals("undefinedvisibilityandstage", apiObjectDoc.getName());
+		Assertions.assertEquals(ApiVisibility.UNDEFINED, apiObjectDoc.getVisibility());
+		Assertions.assertEquals(ApiStage.UNDEFINED, apiObjectDoc.getStage());
 	}
 
 	@Test
@@ -110,10 +110,10 @@ public class ApiObjectDocTest {
 		Set<Class<?>> classes = new HashSet<Class<?>>();
 		classes.add(TemplateApiObject.class);
 		ApiObjectDoc apiObjectDoc = jsondocScanner.getApiObjectDocs(classes).iterator().next();
-		Assert.assertEquals("templateapiobject", apiObjectDoc.getName());
+		Assertions.assertEquals("templateapiobject", apiObjectDoc.getName());
 		Iterator<ApiObjectFieldDoc> iterator = apiObjectDoc.getFields().iterator();
-		Assert.assertEquals("id", iterator.next().getName());
-		Assert.assertEquals("name", iterator.next().getName());
+		Assertions.assertEquals("id", iterator.next().getName());
+		Assertions.assertEquals("name", iterator.next().getName());
 	}
 	
 	@Test
@@ -121,114 +121,114 @@ public class ApiObjectDocTest {
 		Set<Class<?>> classes = new HashSet<Class<?>>();
 		classes.add(NoNameApiObject.class);
 		ApiObjectDoc apiObjectDoc = jsondocScanner.getApiObjectDocs(classes).iterator().next();
-		Assert.assertEquals("nonameapiobject", apiObjectDoc.getName());
-		Assert.assertEquals("id", apiObjectDoc.getFields().iterator().next().getName());
-		Assert.assertEquals(1, apiObjectDoc.getJsondochints().size());
+		Assertions.assertEquals("nonameapiobject", apiObjectDoc.getName());
+		Assertions.assertEquals("id", apiObjectDoc.getFields().iterator().next().getName());
+		Assertions.assertEquals(1, apiObjectDoc.getJsondochints().size());
 	}
 	
 	@Test
 	public void testEnumObjectDoc() {
 		Set<Class<?>> classes = new HashSet<Class<?>>();
 		classes.add(TestEnum.class);
-		ApiObjectDoc childDoc = jsondocScanner.getApiObjectDocs(classes).iterator().next(); 
-		Assert.assertEquals("test-enum", childDoc.getName());
-		Assert.assertEquals(0, childDoc.getFields().size());
-		Assert.assertEquals(TestEnum.TESTENUM1.name(), childDoc.getAllowedvalues()[0]);
-		Assert.assertEquals(TestEnum.TESTENUM2.name(), childDoc.getAllowedvalues()[1]);
-		Assert.assertEquals(TestEnum.TESTENUM3.name(), childDoc.getAllowedvalues()[2]);
+		ApiObjectDoc childDoc = jsondocScanner.getApiObjectDocs(classes).iterator().next();
+		Assertions.assertEquals("test-enum", childDoc.getName());
+		Assertions.assertEquals(0, childDoc.getFields().size());
+		Assertions.assertEquals(TestEnum.TESTENUM1.name(), childDoc.getAllowedvalues()[0]);
+		Assertions.assertEquals(TestEnum.TESTENUM2.name(), childDoc.getAllowedvalues()[1]);
+		Assertions.assertEquals(TestEnum.TESTENUM3.name(), childDoc.getAllowedvalues()[2]);
 	}
 	
 	@Test
 	public void testApiObjectDoc() {
 		Set<Class<?>> classes = new HashSet<Class<?>>();
 		classes.add(TestObject.class);
-		ApiObjectDoc childDoc = jsondocScanner.getApiObjectDocs(classes).iterator().next(); 
-		Assert.assertEquals("test-object", childDoc.getName());
-		Assert.assertEquals(14, childDoc.getFields().size());
-		Assert.assertEquals("1.0", childDoc.getSupportedversions().getSince());
-		Assert.assertEquals("2.12", childDoc.getSupportedversions().getUntil());
-		Assert.assertEquals(ApiVisibility.PUBLIC, childDoc.getVisibility());
-		Assert.assertEquals(ApiStage.PRE_ALPHA, childDoc.getStage());
+		ApiObjectDoc childDoc = jsondocScanner.getApiObjectDocs(classes).iterator().next();
+		Assertions.assertEquals("test-object", childDoc.getName());
+		Assertions.assertEquals(14, childDoc.getFields().size());
+		Assertions.assertEquals("1.0", childDoc.getSupportedversions().getSince());
+		Assertions.assertEquals("2.12", childDoc.getSupportedversions().getUntil());
+		Assertions.assertEquals(ApiVisibility.PUBLIC, childDoc.getVisibility());
+		Assertions.assertEquals(ApiStage.PRE_ALPHA, childDoc.getStage());
 		
 		for (ApiObjectFieldDoc fieldDoc : childDoc.getFields()) {
 			if(fieldDoc.getName().equals("wildcardParametrized")) {
-				Assert.assertEquals("list", fieldDoc.getJsondocType().getType().get(0));
+				Assertions.assertEquals("list", fieldDoc.getJsondocType().getType().get(0));
 			}
 			
 			if(fieldDoc.getName().equals("unparametrizedList")) {
-				Assert.assertEquals("list", fieldDoc.getJsondocType().getType().get(0));
+				Assertions.assertEquals("list", fieldDoc.getJsondocType().getType().get(0));
 			}
 			
 			if(fieldDoc.getName().equals("parametrizedList")) {
-				Assert.assertEquals("list of string", fieldDoc.getJsondocType().getOneLineText());
+				Assertions.assertEquals("list of string", fieldDoc.getJsondocType().getOneLineText());
 			}
 			
 			if(fieldDoc.getName().equals("name")) {
-				Assert.assertEquals("string", fieldDoc.getJsondocType().getType().get(0));
-				Assert.assertEquals("name", fieldDoc.getName());
-				Assert.assertEquals("true", fieldDoc.getRequired());
+				Assertions.assertEquals("string", fieldDoc.getJsondocType().getType().get(0));
+				Assertions.assertEquals("name", fieldDoc.getName());
+				Assertions.assertEquals("true", fieldDoc.getRequired());
 			}
 			
 			if(fieldDoc.getName().equals("age")) {
-				Assert.assertEquals("integer", fieldDoc.getJsondocType().getType().get(0));
-				Assert.assertEquals("age", fieldDoc.getName());
-				Assert.assertEquals("false", fieldDoc.getRequired());
+				Assertions.assertEquals("integer", fieldDoc.getJsondocType().getType().get(0));
+				Assertions.assertEquals("age", fieldDoc.getName());
+				Assertions.assertEquals("false", fieldDoc.getRequired());
 			}
 			
 			if(fieldDoc.getName().equals("avg")) {
-				Assert.assertEquals("long", fieldDoc.getJsondocType().getType().get(0));
-				Assert.assertEquals("avg", fieldDoc.getName());
-				Assert.assertEquals("false", fieldDoc.getRequired());
+				Assertions.assertEquals("long", fieldDoc.getJsondocType().getType().get(0));
+				Assertions.assertEquals("avg", fieldDoc.getName());
+				Assertions.assertEquals("false", fieldDoc.getRequired());
 			}
 			
 			if(fieldDoc.getName().equals("map")) {
-				Assert.assertEquals("map", fieldDoc.getJsondocType().getType().get(0));
-				Assert.assertEquals("string", fieldDoc.getJsondocType().getMapKey().getType().get(0));
-				Assert.assertEquals("integer", fieldDoc.getJsondocType().getMapValue().getType().get(0));
+				Assertions.assertEquals("map", fieldDoc.getJsondocType().getType().get(0));
+				Assertions.assertEquals("string", fieldDoc.getJsondocType().getMapKey().getType().get(0));
+				Assertions.assertEquals("integer", fieldDoc.getJsondocType().getMapValue().getType().get(0));
 			}
 			
 			if(fieldDoc.getName().equals("LongArray")) {
-				Assert.assertEquals("array of long", fieldDoc.getJsondocType().getOneLineText());
-				Assert.assertEquals("LongArray", fieldDoc.getName());
-				Assert.assertEquals("false", fieldDoc.getRequired());
+				Assertions.assertEquals("array of long", fieldDoc.getJsondocType().getOneLineText());
+				Assertions.assertEquals("LongArray", fieldDoc.getName());
+				Assertions.assertEquals("false", fieldDoc.getRequired());
 			}
 
-			if(fieldDoc.getName().equals("longArray")) {
-				Assert.assertEquals("array of long", fieldDoc.getJsondocType().getOneLineText());
-				Assert.assertEquals("longArray", fieldDoc.getName());
-				Assert.assertEquals("false", fieldDoc.getRequired());
+			if(fieldDoc.getName().equals("primitiveLongArray")) {
+				Assertions.assertEquals("array of long", fieldDoc.getJsondocType().getOneLineText());
+				Assertions.assertEquals("primitiveLongArray", fieldDoc.getName());
+				Assertions.assertEquals("false", fieldDoc.getRequired());
 			}
 			
 			if(fieldDoc.getName().equals("fooBar")) {
-				Assert.assertEquals("string", fieldDoc.getJsondocType().getOneLineText());
-				Assert.assertEquals("foo_bar", fieldDoc.getName());
-				Assert.assertEquals("false", fieldDoc.getRequired());
+				Assertions.assertEquals("string", fieldDoc.getJsondocType().getOneLineText());
+				Assertions.assertEquals("foo_bar", fieldDoc.getName());
+				Assertions.assertEquals("false", fieldDoc.getRequired());
 			}
 			
 			if(fieldDoc.getName().equals("version")) {
-				Assert.assertEquals("string", fieldDoc.getJsondocType().getOneLineText());
-				Assert.assertEquals("1.0", fieldDoc.getSupportedversions().getSince());
-				Assert.assertEquals("2.12", fieldDoc.getSupportedversions().getUntil());
+				Assertions.assertEquals("string", fieldDoc.getJsondocType().getOneLineText());
+				Assertions.assertEquals("1.0", fieldDoc.getSupportedversions().getSince());
+				Assertions.assertEquals("2.12", fieldDoc.getSupportedversions().getUntil());
 			}
 			
 			if(fieldDoc.getName().equals("test-enum")) {
-				Assert.assertEquals("test-enum", fieldDoc.getName());
-				Assert.assertEquals(TestEnum.TESTENUM1.name(), fieldDoc.getAllowedvalues()[0]);
-				Assert.assertEquals(TestEnum.TESTENUM2.name(), fieldDoc.getAllowedvalues()[1]);
-				Assert.assertEquals(TestEnum.TESTENUM3.name(), fieldDoc.getAllowedvalues()[2]);
+				Assertions.assertEquals("test-enum", fieldDoc.getName());
+				Assertions.assertEquals(TestEnum.TESTENUM1.name(), fieldDoc.getAllowedvalues()[0]);
+				Assertions.assertEquals(TestEnum.TESTENUM2.name(), fieldDoc.getAllowedvalues()[1]);
+				Assertions.assertEquals(TestEnum.TESTENUM3.name(), fieldDoc.getAllowedvalues()[2]);
 			}
 			
 			if(fieldDoc.getName().equals("test-enum-with-allowed-values")) {
-				Assert.assertEquals("A", fieldDoc.getAllowedvalues()[0]);
-				Assert.assertEquals("B", fieldDoc.getAllowedvalues()[1]);
-				Assert.assertEquals("C", fieldDoc.getAllowedvalues()[2]);
+				Assertions.assertEquals("A", fieldDoc.getAllowedvalues()[0]);
+				Assertions.assertEquals("B", fieldDoc.getAllowedvalues()[1]);
+				Assertions.assertEquals("C", fieldDoc.getAllowedvalues()[2]);
 			}
 
 			if(fieldDoc.getName().equals("orderedProperty")) {
-				Assert.assertEquals("orderedProperty", fieldDoc.getName());
-				Assert.assertEquals(1, fieldDoc.getOrder().intValue());
+				Assertions.assertEquals("orderedProperty", fieldDoc.getName());
+				Assertions.assertEquals(1, fieldDoc.getOrder().intValue());
 			} else {
-				Assert.assertEquals(Integer.MAX_VALUE, fieldDoc.getOrder().intValue());
+				Assertions.assertEquals(Integer.MAX_VALUE, fieldDoc.getOrder().intValue());
 			}
 
 		}

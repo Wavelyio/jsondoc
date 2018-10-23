@@ -12,8 +12,8 @@ import org.jsondoc.core.pojo.ApiMethodDoc;
 import org.jsondoc.core.pojo.flow.ApiFlowDoc;
 import org.jsondoc.core.scanner.DefaultJSONDocScanner;
 import org.jsondoc.core.scanner.JSONDocScanner;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class ApiFlowDocTest {
 	
@@ -54,10 +54,10 @@ public class ApiFlowDocTest {
 	
 	@Test
 	public void testApiDoc() {
-		Set<Class<?>> classes = new HashSet<Class<?>>();
+		Set<Class<?>> classes = new HashSet<>();
 		classes.add(TestFlow.class);
 		
-		List<ApiMethodDoc> apiMethodDocs = new ArrayList<ApiMethodDoc>();
+		List<ApiMethodDoc> apiMethodDocs = new ArrayList<>();
 		ApiMethodDoc apiMethodDoc = new ApiMethodDoc();
 		apiMethodDoc.setId("F1");
 		apiMethodDocs.add(apiMethodDoc);
@@ -65,21 +65,21 @@ public class ApiFlowDocTest {
 		Set<ApiFlowDoc> apiFlowDocs = jsondocScanner.getApiFlowDocs(classes, apiMethodDocs);
 		for (ApiFlowDoc apiFlowDoc : apiFlowDocs) {
 			if(apiFlowDoc.getName().equals("flow")) {
-				Assert.assertEquals("A test flow", apiFlowDoc.getDescription());
-				Assert.assertEquals(3, apiFlowDoc.getSteps().size());
-				Assert.assertEquals("F1", apiFlowDoc.getSteps().get(0).getApimethodid());
-				Assert.assertEquals("F2", apiFlowDoc.getSteps().get(1).getApimethodid());
-				Assert.assertEquals("Flows A", apiFlowDoc.getGroup());
-				Assert.assertNotNull(apiFlowDoc.getSteps().get(0).getApimethoddoc());
-				Assert.assertEquals("F1", apiFlowDoc.getSteps().get(0).getApimethoddoc().getId());
+				Assertions.assertEquals("A test flow", apiFlowDoc.getDescription());
+				Assertions.assertEquals(3, apiFlowDoc.getSteps().size());
+				Assertions.assertEquals("F1", apiFlowDoc.getSteps().get(0).getApimethodid());
+				Assertions.assertEquals("F2", apiFlowDoc.getSteps().get(1).getApimethodid());
+				Assertions.assertEquals("Flows A", apiFlowDoc.getGroup());
+				Assertions.assertNotNull(apiFlowDoc.getSteps().get(0).getApimethoddoc());
+				Assertions.assertEquals("F1", apiFlowDoc.getSteps().get(0).getApimethoddoc().getId());
 			}
 			
 			if(apiFlowDoc.getName().equals("flow2")) {
-				Assert.assertEquals("A test flow 2", apiFlowDoc.getDescription());
-				Assert.assertEquals(3, apiFlowDoc.getSteps().size());
-				Assert.assertEquals("F4", apiFlowDoc.getSteps().get(0).getApimethodid());
-				Assert.assertEquals("F5", apiFlowDoc.getSteps().get(1).getApimethodid());
-				Assert.assertEquals("Flows B", apiFlowDoc.getGroup());
+				Assertions.assertEquals("A test flow 2", apiFlowDoc.getDescription());
+				Assertions.assertEquals(3, apiFlowDoc.getSteps().size());
+				Assertions.assertEquals("F4", apiFlowDoc.getSteps().get(0).getApimethodid());
+				Assertions.assertEquals("F5", apiFlowDoc.getSteps().get(1).getApimethodid());
+				Assertions.assertEquals("Flows B", apiFlowDoc.getGroup());
 			}
 		}
 	}
