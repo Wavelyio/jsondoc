@@ -3,14 +3,15 @@ module jsondoc.core {
     requires slf4j.api;
     requires validation.api;
     requires hibernate.validator;
-    exports org.jsondoc.core.annotation.flow;
-    exports org.jsondoc.core.annotation.global;
-    exports org.jsondoc.core.annotation;
-    exports org.jsondoc.core.pojo.flow;
-    exports org.jsondoc.core.pojo.global;
-    exports org.jsondoc.core.pojo;
-    exports org.jsondoc.core.scanner.builder;
-    exports org.jsondoc.core.scanner.validator;
-    exports org.jsondoc.core.scanner;
-    exports org.jsondoc.core.util;
+
+    exports com.axonmobileiot.jsondoc.core.annotation.flow;
+    exports com.axonmobileiot.jsondoc.core.annotation.global;
+    exports com.axonmobileiot.jsondoc.core.annotation;
+    exports com.axonmobileiot.jsondoc.core.pojo.flow;
+    exports com.axonmobileiot.jsondoc.core.pojo.global;
+    exports com.axonmobileiot.jsondoc.core.pojo;
+    exports com.axonmobileiot.jsondoc.core.scanner.builder;
+    exports com.axonmobileiot.jsondoc.core.scanner.validator;
+    exports com.axonmobileiot.jsondoc.core.scanner;
+    exports com.axonmobileiot.jsondoc.core.util;
 }

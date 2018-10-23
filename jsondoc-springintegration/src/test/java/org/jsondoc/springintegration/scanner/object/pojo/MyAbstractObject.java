@@ -1,9 +1,0 @@
-package org.jsondoc.springintegration.scanner.object.pojo;
-
-public abstract class MyAbstractObject {
-	
-	private Integer id;
-	
-	private String name;
-
-}

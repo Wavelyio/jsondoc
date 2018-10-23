@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.jsondoc</groupId>
+	<groupId>com.axonmobileiot.jsondoc</groupId>
 	<artifactId>jsondoc-master</artifactId>
 	<version>1.2.20-SNAPSHOT</version>
 	<packaging>pom</packaging>
