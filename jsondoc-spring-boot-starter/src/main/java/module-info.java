@@ -1,6 +1,6 @@
 module jsondoc.springboot.starter{
-    requires jsondoc.core;
-    requires jsondoc.springintegration;
+    requires transitive jsondoc.core;
+    requires transitive jsondoc.springintegration;
     requires spring.context;
     requires spring.beans;
     requires spring.boot.autoconfigure;

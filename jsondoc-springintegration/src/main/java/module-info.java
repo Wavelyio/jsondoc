@@ -1,5 +1,5 @@
 module jsondoc.springintegration {
-    requires jsondoc.core;
+    requires transitive jsondoc.core;
     requires spring.context;
     requires spring.web;
     requires spring.core;
