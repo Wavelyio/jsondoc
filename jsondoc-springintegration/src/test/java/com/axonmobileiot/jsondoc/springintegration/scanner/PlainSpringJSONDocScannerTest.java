@@ -1,6 +1,7 @@
 package com.axonmobileiot.jsondoc.springintegration.scanner;
 
 import com.axonmobileiot.jsondoc.core.pojo.*;
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import com.axonmobileiot.jsondoc.core.scanner.JSONDocScanner;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ public class PlainSpringJSONDocScannerTest {
 	public void testMergeApiDoc() {
 		Set<Class<?>> controllers = new LinkedHashSet<Class<?>>();
 		controllers.add(SpringController.class);
-		Set<ApiDoc> apiDocs = jsondocScanner.getApiDocs(controllers, JSONDoc.MethodDisplay.URI);
+		Set<ApiDoc> apiDocs = jsondocScanner.getApiDocs(controllers, MethodDisplay.URI);
 
 		ApiDoc apiDoc = apiDocs.iterator().next();
 		Assertions.assertEquals("SpringController", apiDoc.getDescription());
@@ -41,7 +42,7 @@ public class PlainSpringJSONDocScannerTest {
 		Assertions.assertNotNull(apiDoc.getGroup());
 
 		for (ApiMethodDoc apiMethodDoc : apiDoc.getMethods()) {
-			Assertions.assertEquals(JSONDoc.MethodDisplay.URI, apiMethodDoc.getDisplayMethodAs());
+			Assertions.assertEquals(MethodDisplay.URI, apiMethodDoc.getDisplayMethodAs());
 			Assertions.assertNull(apiMethodDoc.getAuth());
 			Assertions.assertNull(apiMethodDoc.getSupportedversions());
 			Assertions.assertTrue(apiMethodDoc.getApierrors().isEmpty());

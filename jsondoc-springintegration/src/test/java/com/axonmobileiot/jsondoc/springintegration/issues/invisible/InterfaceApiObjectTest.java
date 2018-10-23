@@ -3,6 +3,7 @@ package com.axonmobileiot.jsondoc.springintegration.issues.invisible;
 import com.axonmobileiot.jsondoc.core.pojo.ApiDoc;
 import com.axonmobileiot.jsondoc.core.pojo.ApiMethodDoc;
 import com.axonmobileiot.jsondoc.core.pojo.JSONDoc;
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import com.axonmobileiot.jsondoc.core.scanner.JSONDocScanner;
 import com.axonmobileiot.jsondoc.springintegration.scanner.Spring5JSONDocScanner;
 import org.junit.jupiter.api.Assertions;
@@ -16,7 +17,7 @@ public class InterfaceApiObjectTest {
 	
 	@Test
 	public void testInvisible() {
-		JSONDoc jsonDoc = jsondocScanner.getJSONDoc("version", "basePath", List.of("com.axonmobileiot.jsondoc.springintegration.issues.invisible"), true, JSONDoc.MethodDisplay.URI);
+		JSONDoc jsonDoc = jsondocScanner.getJSONDoc("version", "basePath", List.of("com.axonmobileiot.jsondoc.springintegration.issues.invisible"), true, MethodDisplay.URI);
 		Assertions.assertEquals(1, jsonDoc.getObjects().keySet().size());
 		for (String string : jsonDoc.getObjects().keySet()) {
 			Assertions.assertEquals(2, jsonDoc.getObjects().get(string).size());

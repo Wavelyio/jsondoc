@@ -2,6 +2,7 @@ package com.axonmobileiot.jsondoc.springintegration.controller.object;
 
 import com.axonmobileiot.jsondoc.core.pojo.ApiObjectDoc;
 import com.axonmobileiot.jsondoc.core.pojo.JSONDoc;
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import com.axonmobileiot.jsondoc.core.scanner.JSONDocScanner;
 import com.axonmobileiot.jsondoc.springintegration.scanner.Spring5JSONDocScanner;
 import org.junit.jupiter.api.Assertions;
@@ -22,7 +23,7 @@ public class Spring3JSONDocObjectScannerTest {
     @Test
     public void getJSONDoc() {
         JSONDocScanner jsondocScanner = new Spring5JSONDocScanner();
-        JSONDoc jsondoc = jsondocScanner.getJSONDoc(version, basePath, List.of("org.jsondoc.springmvc.controller"), true, JSONDoc.MethodDisplay.URI);
+        JSONDoc jsondoc = jsondocScanner.getJSONDoc(version, basePath, List.of("org.jsondoc.springmvc.controller"), true, MethodDisplay.URI);
 
         Map<String, Set<ApiObjectDoc>> objects = jsondoc.getObjects();
         for (Set<ApiObjectDoc> values : objects.values()) {
@@ -36,7 +37,7 @@ public class Spring3JSONDocObjectScannerTest {
     @Test
     public void findsNestedObject() {
         JSONDocScanner jsondocScanner = new Spring5JSONDocScanner();
-        JSONDoc jsondoc = jsondocScanner.getJSONDoc(version, basePath, List.of("org.jsondoc.springmvc.controller"), true, JSONDoc.MethodDisplay.URI);
+        JSONDoc jsondoc = jsondocScanner.getJSONDoc(version, basePath, List.of("org.jsondoc.springmvc.controller"), true, MethodDisplay.URI);
 
         Map<String, Set<ApiObjectDoc>> objects = jsondoc.getObjects();
         for (Set<ApiObjectDoc> values : objects.values()) {
@@ -47,7 +48,7 @@ public class Spring3JSONDocObjectScannerTest {
     @Test
     public void findsDeeplyNestedObjects() {
         JSONDocScanner jsondocScanner = new Spring5JSONDocScanner();
-        JSONDoc jsondoc = jsondocScanner.getJSONDoc(version, basePath, List.of("org.jsondoc.springmvc.controller"), true, JSONDoc.MethodDisplay.URI);
+        JSONDoc jsondoc = jsondocScanner.getJSONDoc(version, basePath, List.of("org.jsondoc.springmvc.controller"), true, MethodDisplay.URI);
 
         Map<String, Set<ApiObjectDoc>> objects = jsondoc.getObjects();
         for (Set<ApiObjectDoc> values : objects.values()) {

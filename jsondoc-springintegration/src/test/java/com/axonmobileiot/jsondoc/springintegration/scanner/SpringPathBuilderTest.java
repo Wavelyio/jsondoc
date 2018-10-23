@@ -2,6 +2,7 @@ package com.axonmobileiot.jsondoc.springintegration.scanner;
 
 import com.axonmobileiot.jsondoc.core.pojo.ApiDoc;
 import com.axonmobileiot.jsondoc.core.pojo.JSONDoc;
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import com.axonmobileiot.jsondoc.core.scanner.JSONDocScanner;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -96,7 +97,7 @@ public class SpringPathBuilderTest {
 
 	@Test
 	public void testPath() {
-		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringController.class), JSONDoc.MethodDisplay.URI).iterator().next();
+		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringController.class), MethodDisplay.URI).iterator().next();
 		Assertions.assertEquals("SpringController", apiDoc.getName());
 		boolean slashPath = apiDoc.getMethods().stream().anyMatch(doc -> doc.getPath().contains("/path"));
 		Assertions.assertTrue(slashPath);
@@ -106,7 +107,7 @@ public class SpringPathBuilderTest {
 
 	@Test
 	public void testPath2() {
-		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringController2.class), JSONDoc.MethodDisplay.URI).iterator().next();
+		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringController2.class), MethodDisplay.URI).iterator().next();
 		Assertions.assertEquals("SpringController2", apiDoc.getName());
 		boolean none = apiDoc.getMethods().stream().anyMatch(doc -> doc.getPath().contains("/"));
 		Assertions.assertTrue(none);
@@ -116,7 +117,7 @@ public class SpringPathBuilderTest {
 	
 	@Test
 	public void testPath3() {
-		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringController3.class), JSONDoc.MethodDisplay.URI).iterator().next();
+		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringController3.class), MethodDisplay.URI).iterator().next();
 		Assertions.assertEquals("SpringController3", apiDoc.getName());
 
 		boolean allRight = apiDoc.getMethods().stream()
@@ -131,7 +132,7 @@ public class SpringPathBuilderTest {
 	
 	@Test
 	public void testPath4() {
-		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringController4.class), JSONDoc.MethodDisplay.URI).iterator().next();
+		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringController4.class), MethodDisplay.URI).iterator().next();
 		Assertions.assertEquals("SpringController4", apiDoc.getName());
 		boolean allRight = apiDoc.getMethods().stream().anyMatch(doc -> doc.getPath().contains("/path"));
 		Assertions.assertTrue(allRight);
@@ -140,7 +141,7 @@ public class SpringPathBuilderTest {
 
 	@Test
 	public void testPath5() {
-		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringController5.class), JSONDoc.MethodDisplay.URI).iterator().next();
+		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringController5.class), MethodDisplay.URI).iterator().next();
 		Assertions.assertEquals("SpringController5", apiDoc.getName());
 		boolean allRight = apiDoc.getMethods().stream().anyMatch(doc -> doc.getPath().contains("/path") && doc.getPath().contains("/path2"));
 		Assertions.assertTrue(allRight);
@@ -148,7 +149,7 @@ public class SpringPathBuilderTest {
 
 	@Test
 	public void testPath6() {
-		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringController6.class), JSONDoc.MethodDisplay.URI).iterator().next();
+		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringController6.class), MethodDisplay.URI).iterator().next();
 		Assertions.assertEquals("SpringController6", apiDoc.getName());
 		boolean allRight = apiDoc.getMethods().stream().anyMatch(doc -> doc.getPath().contains("/api/widget/frame"));
 		Assertions.assertTrue(allRight);
@@ -156,7 +157,7 @@ public class SpringPathBuilderTest {
 	
 	@Test
 	public void testPathWithMethodDisplayMethod() {
-		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringController5.class), JSONDoc.MethodDisplay.METHOD).iterator().next();
+		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringController5.class), MethodDisplay.METHOD).iterator().next();
 		boolean allRight = apiDoc.getMethods().stream()
                 .anyMatch(doc -> doc.getPath().contains("/path")
                         && doc.getPath().contains("/path2")

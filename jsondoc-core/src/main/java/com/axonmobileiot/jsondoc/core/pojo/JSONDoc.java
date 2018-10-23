@@ -3,6 +3,7 @@ package com.axonmobileiot.jsondoc.core.pojo;
 import java.util.Map;
 import java.util.Set;
 
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import com.axonmobileiot.jsondoc.core.pojo.flow.ApiFlowDoc;
 import com.axonmobileiot.jsondoc.core.pojo.global.ApiGlobalDoc;
 
@@ -19,12 +20,7 @@ public class JSONDoc {
 	private boolean playgroundEnabled;
 	private MethodDisplay displayMethodAs;
 
-	public enum MethodDisplay {
-		URI, SUMMARY, METHOD
-	}
-
 	public JSONDoc(String version, String basePath) {
-		super();
 		this.version = version;
 		this.basePath = basePath;
 	}

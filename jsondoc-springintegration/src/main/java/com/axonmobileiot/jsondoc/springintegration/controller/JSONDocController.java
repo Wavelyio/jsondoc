@@ -1,6 +1,7 @@
 package com.axonmobileiot.jsondoc.springintegration.controller;
 
 import com.axonmobileiot.jsondoc.core.pojo.JSONDoc;
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import com.axonmobileiot.jsondoc.core.scanner.JSONDocScanner;
 import com.axonmobileiot.jsondoc.springintegration.scanner.Spring5JSONDocScanner;
 import org.springframework.http.MediaType;
@@ -19,7 +20,7 @@ public class JSONDocController {
 	private List<String> packages;
 	private JSONDocScanner jsondocScanner;
 	private boolean playgroundEnabled = true;
-	private JSONDoc.MethodDisplay displayMethodAs = JSONDoc.MethodDisplay.URI;
+	private MethodDisplay displayMethodAs = MethodDisplay.URI;
 
 	public JSONDocController(String version, String basePath, List<String> packages) {
 		this.version = version;
@@ -36,11 +37,11 @@ public class JSONDocController {
 		this.playgroundEnabled = playgroundEnabled;
 	}
 
-	public JSONDoc.MethodDisplay getDisplayMethodAs() {
+	public MethodDisplay getDisplayMethodAs() {
 		return displayMethodAs;
 	}
 
-	public void setDisplayMethodAs(JSONDoc.MethodDisplay displayMethodAs) {
+	public void setDisplayMethodAs(MethodDisplay displayMethodAs) {
 		this.displayMethodAs = displayMethodAs;
 	}
 

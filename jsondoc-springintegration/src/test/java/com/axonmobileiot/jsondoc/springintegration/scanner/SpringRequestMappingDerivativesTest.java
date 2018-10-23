@@ -1,6 +1,7 @@
 package com.axonmobileiot.jsondoc.springintegration.scanner;
 import com.axonmobileiot.jsondoc.core.pojo.ApiDoc;
 import com.axonmobileiot.jsondoc.core.pojo.JSONDoc;
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import com.axonmobileiot.jsondoc.core.scanner.JSONDocScanner;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -45,7 +46,7 @@ public class SpringRequestMappingDerivativesTest {
 
     @Test
     public void testGetMapping() {
-        ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(RequestMappingController.class), JSONDoc.MethodDisplay.URI).iterator().next();
+        ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(RequestMappingController.class), MethodDisplay.URI).iterator().next();
         Assertions.assertEquals("RequestMappingController", apiDoc.getName());
         apiDoc.getMethods().stream().anyMatch(doc -> doc.getMethod().equals("get"));
         boolean getMethodPresent = apiDoc.getMethods().stream().anyMatch(doc -> doc.getMethod().equals("get"));

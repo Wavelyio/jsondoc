@@ -15,6 +15,7 @@ import java.util.TreeSet;
 import com.axonmobileiot.jsondoc.core.annotation.Api;
 import com.axonmobileiot.jsondoc.core.annotation.flow.ApiFlow;
 import com.axonmobileiot.jsondoc.core.pojo.*;
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import com.axonmobileiot.jsondoc.core.pojo.flow.ApiFlowDoc;
 import com.axonmobileiot.jsondoc.core.pojo.global.ApiGlobalDoc;
 import com.axonmobileiot.jsondoc.core.scanner.builder.JSONDocApiAuthDocBuilder;
@@ -70,7 +71,7 @@ public abstract class AbstractJSONDocScanner implements JSONDocScanner {
 	 * Returns the main <code>ApiDoc</code>, containing <code>ApiMethodDoc</code> and <code>ApiObjectDoc</code> objects
 	 * @return An <code>ApiDoc</code> object
 	 */
-	public JSONDoc getJSONDoc(String version, String basePath, List<String> packages, boolean playgroundEnabled, JSONDoc.MethodDisplay displayMethodAs) {
+	public JSONDoc getJSONDoc(String version, String basePath, List<String> packages, boolean playgroundEnabled, MethodDisplay displayMethodAs) {
 		Set<URL> urls = new HashSet<>();
 		FilterBuilder filter = new FilterBuilder();
 		
@@ -113,7 +114,7 @@ public abstract class AbstractJSONDocScanner implements JSONDocScanner {
 	/**
 	 * Gets the API documentation for the set of classes passed as argument
 	 */
-	public Set<ApiDoc> getApiDocs(Set<Class<?>> classes, JSONDoc.MethodDisplay displayMethodAs) {
+	public Set<ApiDoc> getApiDocs(Set<Class<?>> classes, MethodDisplay displayMethodAs) {
 		Set<ApiDoc> apiDocs = new TreeSet<>();
 		for (Class<?> controller : classes) {
 			ApiDoc apiDoc = getApiDoc(controller, displayMethodAs);
@@ -127,7 +128,7 @@ public abstract class AbstractJSONDocScanner implements JSONDocScanner {
 	 * @param controller
 	 * @return
 	 */
-	private ApiDoc getApiDoc(Class<?> controller, JSONDoc.MethodDisplay displayMethodAs) {
+	private ApiDoc getApiDoc(Class<?> controller, MethodDisplay displayMethodAs) {
 		log.debug("Getting JSONDoc for class: " + controller.getName());
 		ApiDoc apiDoc = initApiDoc(controller);
 
@@ -142,7 +143,7 @@ public abstract class AbstractJSONDocScanner implements JSONDocScanner {
 		return apiDoc;
 	}
 	
-	private Set<ApiMethodDoc> getApiMethodDocs(Class<?> controller, JSONDoc.MethodDisplay displayMethodAs) {
+	private Set<ApiMethodDoc> getApiMethodDocs(Class<?> controller, MethodDisplay displayMethodAs) {
 		Set<ApiMethodDoc> apiMethodDocs = new TreeSet<>();
 		Set<Method> methods = jsondocMethods(controller);
 		for (Method method : methods) {
@@ -154,7 +155,7 @@ public abstract class AbstractJSONDocScanner implements JSONDocScanner {
 		return apiMethodDocs;
 	}
 	
-	private ApiMethodDoc getApiMethodDoc(Method method, Class<?> controller, JSONDoc.MethodDisplay displayMethodAs) {
+	private ApiMethodDoc getApiMethodDoc(Method method, Class<?> controller, MethodDisplay displayMethodAs) {
 		ApiMethodDoc apiMethodDoc = initApiMethodDoc(method, jsondocTemplates);
 		
 		apiMethodDoc.setDisplayMethodAs(displayMethodAs);
@@ -211,7 +212,7 @@ public abstract class AbstractJSONDocScanner implements JSONDocScanner {
 		return apiObjectDocs;
 	}
 	
-	public Map<String, Set<ApiDoc>> getApiDocsMap(Set<Class<?>> classes, JSONDoc.MethodDisplay displayMethodAs) {
+	public Map<String, Set<ApiDoc>> getApiDocsMap(Set<Class<?>> classes, MethodDisplay displayMethodAs) {
 		Map<String, Set<ApiDoc>> apiDocsMap = new TreeMap<>();
 		Set<ApiDoc> apiDocSet = getApiDocs(classes, displayMethodAs);
 		for (ApiDoc apiDoc : apiDocSet) {

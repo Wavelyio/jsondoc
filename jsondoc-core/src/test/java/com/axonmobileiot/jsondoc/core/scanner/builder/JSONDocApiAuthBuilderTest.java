@@ -6,6 +6,7 @@ import com.axonmobileiot.jsondoc.core.annotation.ApiMethod;
 import com.axonmobileiot.jsondoc.core.pojo.ApiDoc;
 import com.axonmobileiot.jsondoc.core.pojo.ApiMethodDoc;
 import com.axonmobileiot.jsondoc.core.pojo.JSONDoc;
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import com.axonmobileiot.jsondoc.core.scanner.DefaultJSONDocScanner;
 import com.axonmobileiot.jsondoc.core.scanner.JSONDocScanner;
 import org.junit.jupiter.api.Assertions;
@@ -36,7 +37,7 @@ public class JSONDocApiAuthBuilderTest {
 	
 	@Test
 	public void testApiAuthToken() {
-		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(Controller.class), JSONDoc.MethodDisplay.URI).iterator().next();
+		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(Controller.class), MethodDisplay.URI).iterator().next();
 		Assertions.assertEquals("TOKEN", apiDoc.getAuth().getType());
 		Assertions.assertEquals("", apiDoc.getAuth().getScheme());
 		Assertions.assertEquals("abc", apiDoc.getAuth().getTesttokens().iterator().next());

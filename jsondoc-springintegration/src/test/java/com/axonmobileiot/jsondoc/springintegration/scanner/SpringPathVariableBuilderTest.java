@@ -5,6 +5,7 @@ import com.axonmobileiot.jsondoc.core.pojo.ApiDoc;
 import com.axonmobileiot.jsondoc.core.pojo.ApiMethodDoc;
 import com.axonmobileiot.jsondoc.core.pojo.ApiParamDoc;
 import com.axonmobileiot.jsondoc.core.pojo.JSONDoc;
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import com.axonmobileiot.jsondoc.core.scanner.JSONDocScanner;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -49,7 +50,7 @@ public class SpringPathVariableBuilderTest {
 	
 	@Test
 	public void testPathVariable() {
-		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringController.class), JSONDoc.MethodDisplay.URI).iterator().next();
+		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringController.class), MethodDisplay.URI).iterator().next();
 		Assertions.assertEquals("SpringController", apiDoc.getName());
 		Assertions.assertEquals(2, apiDoc.getMethods().size());
 		for (ApiMethodDoc apiMethodDoc : apiDoc.getMethods()) {
@@ -83,7 +84,7 @@ public class SpringPathVariableBuilderTest {
 	
 	@Test
 	public void testPathVariableWithJSONDoc() {
-		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringController2.class), JSONDoc.MethodDisplay.URI).iterator().next();
+		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringController2.class), MethodDisplay.URI).iterator().next();
 		Assertions.assertEquals("SpringController2", apiDoc.getName());
 		Assertions.assertEquals(1, apiDoc.getMethods().size());
 		for (ApiMethodDoc apiMethodDoc : apiDoc.getMethods()) {

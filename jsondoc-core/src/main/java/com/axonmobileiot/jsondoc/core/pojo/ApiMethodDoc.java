@@ -1,5 +1,7 @@
 package com.axonmobileiot.jsondoc.core.pojo;
 
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
+
 import java.util.*;
 
 public class ApiMethodDoc extends AbstractDoc implements Comparable<ApiMethodDoc> {
@@ -26,7 +28,7 @@ public class ApiMethodDoc extends AbstractDoc implements Comparable<ApiMethodDoc
 	private List<ApiErrorDoc> apierrors;
 	private ApiVersionDoc supportedversions;
 	private ApiAuthDoc auth;
-	private JSONDoc.MethodDisplay displayMethodAs;
+	private MethodDisplay displayMethodAs;
 
 	public ApiMethodDoc() {
 		super();
@@ -48,7 +50,7 @@ public class ApiMethodDoc extends AbstractDoc implements Comparable<ApiMethodDoc
 		this.apierrors = new ArrayList<>();
 		this.supportedversions = null;
 		this.auth = null;
-		this.displayMethodAs = JSONDoc.MethodDisplay.URI;
+		this.displayMethodAs = MethodDisplay.URI;
 	}
 
 	public Set<ApiHeaderDoc> getHeaders() {
@@ -187,11 +189,11 @@ public class ApiMethodDoc extends AbstractDoc implements Comparable<ApiMethodDoc
 		this.summary = summary;
 	}
 
-	public JSONDoc.MethodDisplay getDisplayMethodAs() {
+	public MethodDisplay getDisplayMethodAs() {
 		return displayMethodAs;
 	}
 
-	public void setDisplayMethodAs(JSONDoc.MethodDisplay displayMethodAs) {
+	public void setDisplayMethodAs(MethodDisplay displayMethodAs) {
 		this.displayMethodAs = displayMethodAs;
 	}
 

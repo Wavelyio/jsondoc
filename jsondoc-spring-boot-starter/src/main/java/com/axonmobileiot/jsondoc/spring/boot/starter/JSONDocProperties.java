@@ -1,6 +1,7 @@
 package com.axonmobileiot.jsondoc.spring.boot.starter;
 
 import com.axonmobileiot.jsondoc.core.pojo.JSONDoc;
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class JSONDocProperties {
 	 * Whether to display methods as URIs or with a short description (summary attribute in the @ApiMethod annotation).
 	 * Allowed values are URI and SUMMARY.
 	 */
-	private JSONDoc.MethodDisplay displayMethodAs = JSONDoc.MethodDisplay.URI;
+	private MethodDisplay displayMethodAs = MethodDisplay.URI;
 
 	public String getVersion() {
 		return version;
@@ -69,11 +70,11 @@ public class JSONDocProperties {
 		this.playgroundEnabled = playgroundEnabled;
 	}
 
-	public JSONDoc.MethodDisplay getDisplayMethodAs() {
+	public MethodDisplay getDisplayMethodAs() {
 		return displayMethodAs;
 	}
 
-	public void setDisplayMethodAs(JSONDoc.MethodDisplay displayMethodAs) {
+	public void setDisplayMethodAs(MethodDisplay displayMethodAs) {
 		this.displayMethodAs = displayMethodAs;
 	}
 

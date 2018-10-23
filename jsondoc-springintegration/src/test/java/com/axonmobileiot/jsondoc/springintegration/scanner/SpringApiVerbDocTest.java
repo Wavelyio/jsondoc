@@ -4,6 +4,7 @@ import com.axonmobileiot.jsondoc.core.pojo.ApiDoc;
 import com.axonmobileiot.jsondoc.core.pojo.ApiMethodDoc;
 import com.axonmobileiot.jsondoc.core.pojo.ApiVerb;
 import com.axonmobileiot.jsondoc.core.pojo.JSONDoc;
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import com.axonmobileiot.jsondoc.core.scanner.JSONDocScanner;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -46,7 +47,7 @@ public class SpringApiVerbDocTest {
 
 	@Test
 	public void testApiVerb() {
-		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringApiVerbController.class), JSONDoc.MethodDisplay.URI).iterator().next();
+		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringApiVerbController.class), MethodDisplay.URI).iterator().next();
 		Assertions.assertEquals("SpringApiVerbController", apiDoc.getName());
 		Assertions.assertEquals(2, apiDoc.getMethods().size());
 		for (ApiMethodDoc apiMethodDoc : apiDoc.getMethods()) {
@@ -59,7 +60,7 @@ public class SpringApiVerbDocTest {
 			}
 		}
 		
-		apiDoc = jsondocScanner.getApiDocs(Set.of(SpringApiVerbController2.class), JSONDoc.MethodDisplay.URI).iterator().next();
+		apiDoc = jsondocScanner.getApiDocs(Set.of(SpringApiVerbController2.class), MethodDisplay.URI).iterator().next();
 		Assertions.assertEquals("SpringApiVerbController2", apiDoc.getName());
 		Assertions.assertEquals(1, apiDoc.getMethods().size());
 		for (ApiMethodDoc apiMethodDoc : apiDoc.getMethods()) {

@@ -2,6 +2,7 @@ package com.axonmobileiot.jsondoc.springintegration.scanner;
 
 import com.axonmobileiot.jsondoc.core.pojo.ApiObjectDoc;
 import com.axonmobileiot.jsondoc.core.pojo.JSONDoc;
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import com.axonmobileiot.jsondoc.core.scanner.JSONDocScanner;
 import com.axonmobileiot.jsondoc.springintegration.controller.object.Spring3JSONDocObjectScannerTest;
 import org.junit.jupiter.api.Test;
@@ -21,7 +22,7 @@ public class Spring3JSONDocGenericsObjectScannerTest {
 	@Test
 	public void getJSONDoc() {
 		JSONDocScanner jsondocScanner = new Spring5JSONDocScanner();
-		JSONDoc jsondoc = jsondocScanner.getJSONDoc(version, basePath, List.of("org.jsondoc.springmvc.issues.issue174"), true, JSONDoc.MethodDisplay.URI);
+		JSONDoc jsondoc = jsondocScanner.getJSONDoc(version, basePath, List.of("org.jsondoc.springmvc.issues.issue174"), true, MethodDisplay.URI);
 
 		Map<String, Set<ApiObjectDoc>> objects = jsondoc.getObjects();
 		for (Set<ApiObjectDoc> values : objects.values()) {

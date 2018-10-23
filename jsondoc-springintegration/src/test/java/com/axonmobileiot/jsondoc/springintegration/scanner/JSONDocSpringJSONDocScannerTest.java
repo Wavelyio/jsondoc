@@ -2,6 +2,7 @@ package com.axonmobileiot.jsondoc.springintegration.scanner;
 
 import com.axonmobileiot.jsondoc.core.annotation.*;
 import com.axonmobileiot.jsondoc.core.pojo.*;
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import com.axonmobileiot.jsondoc.core.scanner.JSONDocScanner;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -44,7 +45,7 @@ public class JSONDocSpringJSONDocScannerTest {
 	public void testMergeApiDoc() {
 		Set<Class<?>> controllers = new LinkedHashSet<Class<?>>();
 		controllers.add(SpringController.class);
-		Set<ApiDoc> apiDocs = jsondocScanner.getApiDocs(controllers, JSONDoc.MethodDisplay.URI);
+		Set<ApiDoc> apiDocs = jsondocScanner.getApiDocs(controllers, MethodDisplay.URI);
 		
 		ApiDoc apiDoc = apiDocs.iterator().next();
 		Assertions.assertEquals("A spring controller", apiDoc.getDescription());

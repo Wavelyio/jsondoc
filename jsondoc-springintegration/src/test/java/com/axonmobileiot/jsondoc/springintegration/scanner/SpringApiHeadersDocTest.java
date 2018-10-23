@@ -4,6 +4,7 @@ import com.axonmobileiot.jsondoc.core.pojo.ApiDoc;
 import com.axonmobileiot.jsondoc.core.pojo.ApiHeaderDoc;
 import com.axonmobileiot.jsondoc.core.pojo.ApiMethodDoc;
 import com.axonmobileiot.jsondoc.core.pojo.JSONDoc;
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import com.axonmobileiot.jsondoc.core.scanner.JSONDocScanner;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -42,7 +43,7 @@ public class SpringApiHeadersDocTest {
 	@SuppressWarnings("unused")
 	@Test
 	public void testApiHeadersOnClass() {
-		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringApiHeadersController.class), JSONDoc.MethodDisplay.URI).iterator().next();
+		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringApiHeadersController.class), MethodDisplay.URI).iterator().next();
 		Assertions.assertEquals("SpringApiHeadersController", apiDoc.getName());
 		Assertions.assertEquals(3, apiDoc.getMethods().size());
 		for (ApiMethodDoc apiMethodDoc : apiDoc.getMethods()) {

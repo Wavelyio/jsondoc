@@ -3,6 +3,7 @@ package com.axonmobileiot.jsondoc.core.scanner.builder;
 import com.axonmobileiot.jsondoc.core.annotation.Api;
 import com.axonmobileiot.jsondoc.core.annotation.ApiMethod;
 import com.axonmobileiot.jsondoc.core.pojo.*;
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import com.axonmobileiot.jsondoc.core.scanner.DefaultJSONDocScanner;
 import com.axonmobileiot.jsondoc.core.scanner.JSONDocScanner;
 import org.junit.jupiter.api.Assertions;
@@ -40,7 +41,7 @@ public class JSONDocApiVisibilityBuilderTest {
 	
 	@Test
 	public void testApiVisibility() {
-		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(Controller.class), JSONDoc.MethodDisplay.URI).iterator().next();
+		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(Controller.class), MethodDisplay.URI).iterator().next();
         Assertions.assertEquals(ApiVisibility.PUBLIC, apiDoc.getVisibility());
         Assertions.assertEquals(ApiStage.BETA, apiDoc.getStage());
 		
@@ -55,7 +56,7 @@ public class JSONDocApiVisibilityBuilderTest {
 			}
 		}
 		
-		apiDoc = jsondocScanner.getApiDocs(Set.of(Controller2.class), JSONDoc.MethodDisplay.URI).iterator().next();
+		apiDoc = jsondocScanner.getApiDocs(Set.of(Controller2.class), MethodDisplay.URI).iterator().next();
         Assertions.assertEquals(ApiVisibility.UNDEFINED, apiDoc.getVisibility());
         Assertions.assertEquals(ApiStage.UNDEFINED, apiDoc.getStage());
 		

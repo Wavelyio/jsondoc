@@ -4,6 +4,7 @@ import com.axonmobileiot.jsondoc.core.pojo.ApiDoc;
 import com.axonmobileiot.jsondoc.core.pojo.ApiMethodDoc;
 import com.axonmobileiot.jsondoc.core.pojo.ApiVerb;
 import com.axonmobileiot.jsondoc.core.pojo.JSONDoc;
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import com.axonmobileiot.jsondoc.core.scanner.DefaultJSONDocScanner;
 import com.axonmobileiot.jsondoc.core.scanner.JSONDocScanner;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,7 +29,7 @@ public class DefaultJSONDocScannerTest {
     @Test
     public void getJSONDoc() throws IOException {
     	JSONDocScanner jsondocScanner = new DefaultJSONDocScanner();
-        JSONDoc jsondoc = jsondocScanner.getJSONDoc(version, basePath, List.of("com.axonmobileiot.jsondoc.core.util"), true, JSONDoc.MethodDisplay.URI);
+        JSONDoc jsondoc = jsondocScanner.getJSONDoc(version, basePath, List.of("com.axonmobileiot.jsondoc.core.util"), true, MethodDisplay.URI);
         assertEquals(1, jsondoc.getApis().size());
 
         int countApis = 0;

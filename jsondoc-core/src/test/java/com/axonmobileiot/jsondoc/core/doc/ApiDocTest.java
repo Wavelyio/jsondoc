@@ -2,6 +2,7 @@ package com.axonmobileiot.jsondoc.core.doc;
 
 import com.axonmobileiot.jsondoc.core.annotation.*;
 import com.axonmobileiot.jsondoc.core.pojo.*;
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import com.axonmobileiot.jsondoc.core.scanner.DefaultJSONDocScanner;
 import com.axonmobileiot.jsondoc.core.scanner.JSONDocScanner;
 import com.axonmobileiot.jsondoc.core.util.controller.Test3Controller;
@@ -277,7 +278,7 @@ public class ApiDocTest {
 	public void testApiErrorsDoc() {
 
 		final ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(Test3Controller.class),
-				JSONDoc.MethodDisplay.URI).iterator().next();
+				MethodDisplay.URI).iterator().next();
 
 		final Set<ApiMethodDoc> methods = apiDoc.getMethods();
 		final ApiMethodDoc apiMethodDoc = methods.iterator().next();
@@ -296,7 +297,7 @@ public class ApiDocTest {
 	public void testApiDoc() {
 		Set<Class<?>> classes = new HashSet<Class<?>>();
 		classes.add(TestController.class);
-		ApiDoc apiDoc = jsondocScanner.getApiDocs(classes, JSONDoc.MethodDisplay.URI).iterator().next();
+		ApiDoc apiDoc = jsondocScanner.getApiDocs(classes, MethodDisplay.URI).iterator().next();
 		Assertions.assertEquals("test-controller", apiDoc.getName());
 		Assertions.assertEquals("a-test-controller", apiDoc.getDescription());
 		Assertions.assertEquals("1.0", apiDoc.getSupportedversions().getSince());
@@ -424,7 +425,7 @@ public class ApiDocTest {
 
 		classes.clear();
 		classes.add(TestControllerWithBasicAuth.class);
-		apiDoc = jsondocScanner.getApiDocs(classes, JSONDoc.MethodDisplay.URI).iterator().next();
+		apiDoc = jsondocScanner.getApiDocs(classes, MethodDisplay.URI).iterator().next();
 		Assertions.assertEquals("test-controller-with-basic-auth", apiDoc.getName());
 		Assertions.assertEquals(ApiAuthType.BASIC_AUTH.name(), apiDoc.getAuth().getType());
 		Assertions.assertEquals("ROLE_USER", apiDoc.getAuth().getRoles().get(0));
@@ -453,7 +454,7 @@ public class ApiDocTest {
 		
 		classes.clear();
 		classes.add(TestControllerWithNoAuthAnnotation.class);
-		apiDoc = jsondocScanner.getApiDocs(classes, JSONDoc.MethodDisplay.URI).iterator().next();
+		apiDoc = jsondocScanner.getApiDocs(classes, MethodDisplay.URI).iterator().next();
 		Assertions.assertEquals("test-controller-with-no-auth-annotation", apiDoc.getName());
 		Assertions.assertNull(apiDoc.getAuth());
 		
@@ -477,7 +478,7 @@ public class ApiDocTest {
 		
 		classes.clear();
 		classes.add(TestOldStyleServlets.class);
-		apiDoc = jsondocScanner.getApiDocs(classes, JSONDoc.MethodDisplay.URI).iterator().next();
+		apiDoc = jsondocScanner.getApiDocs(classes, MethodDisplay.URI).iterator().next();
 		Assertions.assertEquals("test-old-style-servlets", apiDoc.getName());
 		
 		for (ApiMethodDoc apiMethodDoc : apiDoc.getMethods()) {
@@ -510,7 +511,7 @@ public class ApiDocTest {
 		
 		classes.clear();
 		classes.add(TestErrorsAndWarningsAndHints.class);
-		apiDoc = jsondocScanner.getApiDocs(classes, JSONDoc.MethodDisplay.URI).iterator().next();
+		apiDoc = jsondocScanner.getApiDocs(classes, MethodDisplay.URI).iterator().next();
 		Assertions.assertEquals("test-errors-warnings-hints", apiDoc.getName());
 		ApiMethodDoc apiMethodDoc = apiDoc.getMethods().iterator().next();
 		Assertions.assertEquals(1, apiMethodDoc.getJsondocerrors().size());
@@ -519,7 +520,7 @@ public class ApiDocTest {
 		
 		classes.clear();
 		classes.add(TestErrorsAndWarningsAndHintsMethodSummary.class);
-		apiDoc = jsondocScanner.getApiDocs(classes, JSONDoc.MethodDisplay.SUMMARY).iterator().next();
+		apiDoc = jsondocScanner.getApiDocs(classes, MethodDisplay.SUMMARY).iterator().next();
 		apiMethodDoc = apiDoc.getMethods().iterator().next();
 		Assertions.assertEquals(1, apiMethodDoc.getJsondocerrors().size());
 		Assertions.assertEquals(1, apiMethodDoc.getJsondocwarnings().size());
@@ -527,7 +528,7 @@ public class ApiDocTest {
 		
 		classes.clear();
 		classes.add(InterfaceController.class);
-		apiDoc = jsondocScanner.getApiDocs(classes, JSONDoc.MethodDisplay.URI).iterator().next();
+		apiDoc = jsondocScanner.getApiDocs(classes, MethodDisplay.URI).iterator().next();
 		Assertions.assertEquals("interface-controller", apiDoc.getName());
 		apiMethodDoc = apiDoc.getMethods().iterator().next();
 		Assertions.assertNotNull(apiMethodDoc);
@@ -535,14 +536,14 @@ public class ApiDocTest {
 		
 		classes.clear();
 		classes.add(TestDeclaredMethods.class);
-		apiDoc = jsondocScanner.getApiDocs(classes, JSONDoc.MethodDisplay.URI).iterator().next();
+		apiDoc = jsondocScanner.getApiDocs(classes, MethodDisplay.URI).iterator().next();
 		Assertions.assertEquals("test-declared-methods", apiDoc.getName());
 		Assertions.assertEquals(2, apiDoc.getMethods().size());
 		
 		
 		classes.clear();
 		classes.add(TestMultipleParamsWithSameMethod.class);
-		apiDoc = jsondocScanner.getApiDocs(classes, JSONDoc.MethodDisplay.URI).iterator().next();
+		apiDoc = jsondocScanner.getApiDocs(classes, MethodDisplay.URI).iterator().next();
 		Assertions.assertEquals(3, apiDoc.getMethods().size());
 		
 	}

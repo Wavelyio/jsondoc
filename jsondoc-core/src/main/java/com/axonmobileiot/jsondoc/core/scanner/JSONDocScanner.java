@@ -4,6 +4,7 @@ import com.axonmobileiot.jsondoc.core.pojo.ApiDoc;
 import com.axonmobileiot.jsondoc.core.pojo.ApiMethodDoc;
 import com.axonmobileiot.jsondoc.core.pojo.ApiObjectDoc;
 import com.axonmobileiot.jsondoc.core.pojo.JSONDoc;
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import com.axonmobileiot.jsondoc.core.pojo.flow.ApiFlowDoc;
 import com.axonmobileiot.jsondoc.core.pojo.global.ApiGlobalDoc;
 
@@ -13,9 +14,9 @@ import java.util.Set;
 
 public interface JSONDocScanner {
 	
-	JSONDoc getJSONDoc(String version, String basePath, List<String> packages, boolean playgroundEnabled, JSONDoc.MethodDisplay methodDisplay);
+	JSONDoc getJSONDoc(String version, String basePath, List<String> packages, boolean playgroundEnabled, MethodDisplay methodDisplay);
 
-	Set<ApiDoc> getApiDocs(Set<Class<?>> classes, JSONDoc.MethodDisplay displayMethodAs);
+	Set<ApiDoc> getApiDocs(Set<Class<?>> classes, MethodDisplay displayMethodAs);
 	
 	Set<ApiObjectDoc> getApiObjectDocs(Set<Class<?>> classes);
 

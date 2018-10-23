@@ -1,6 +1,7 @@
 package com.axonmobileiot.jsondoc.core.scanner.validator;
 
 import com.axonmobileiot.jsondoc.core.pojo.*;
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 
 import java.util.Set;
 
@@ -14,7 +15,7 @@ public class JSONDocApiMethodDocValidator {
 	 * @param apiMethodDoc
 	 * @return
 	 */
-	public static ApiMethodDoc validateApiMethodDoc(ApiMethodDoc apiMethodDoc, JSONDoc.MethodDisplay displayMethodAs) {
+	public static ApiMethodDoc validateApiMethodDoc(ApiMethodDoc apiMethodDoc, MethodDisplay displayMethodAs) {
 		final String ERROR_MISSING_METHOD_PATH 				= "Missing documentation data: path";
 		final String ERROR_MISSING_PATH_PARAM_NAME 			= "Missing documentation data: path parameter name";
 		final String ERROR_MISSING_QUERY_PARAM_NAME 		= "Missing documentation data: query parameter name";
@@ -33,7 +34,7 @@ public class JSONDocApiMethodDocValidator {
 			apiMethodDoc.addJsondocerror(ERROR_MISSING_METHOD_PATH);
 		}
 		
-		if(apiMethodDoc.getSummary().trim().isEmpty() && displayMethodAs.equals(JSONDoc.MethodDisplay.SUMMARY)) {
+		if(apiMethodDoc.getSummary().trim().isEmpty() && displayMethodAs.equals(MethodDisplay.SUMMARY)) {
 			apiMethodDoc.setSummary(MESSAGE_MISSING_METHOD_SUMMARY);
 			apiMethodDoc.addJsondochint(HINT_MISSING_METHOD_SUMMARY);
 		}

@@ -7,6 +7,7 @@ import com.axonmobileiot.jsondoc.core.annotation.ApiMethod;
 import com.axonmobileiot.jsondoc.core.pojo.ApiDoc;
 import com.axonmobileiot.jsondoc.core.pojo.ApiMethodDoc;
 import com.axonmobileiot.jsondoc.core.pojo.JSONDoc;
+import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import com.axonmobileiot.jsondoc.core.scanner.DefaultJSONDocScanner;
 import com.axonmobileiot.jsondoc.core.scanner.JSONDocScanner;
 import org.junit.jupiter.api.Assertions;
@@ -47,7 +48,7 @@ public class ApiHeadersDocTest {
 	
 	@Test
 	public void testApiHeadersOnClass() {
-		final ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(ApiHeadersController.class), JSONDoc.MethodDisplay.URI).iterator().next();
+		final ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(ApiHeadersController.class), MethodDisplay.URI).iterator().next();
 		Assertions.assertEquals("ApiHeadersController", apiDoc.getName());
 		for (ApiMethodDoc apiMethodDoc : apiDoc.getMethods()) {
 			if(apiMethodDoc.getPath().contains("/api-headers-controller-method-one")) {
