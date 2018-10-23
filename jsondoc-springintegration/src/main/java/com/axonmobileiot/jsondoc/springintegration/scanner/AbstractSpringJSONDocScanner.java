@@ -124,7 +124,6 @@ public abstract class AbstractSpringJSONDocScanner extends AbstractJSONDocScanne
 				for (Class<?> implementation : reflections.getSubTypesOf(clazz)) {
 					candidates.addAll(buildJSONDocObjectsCandidates(candidates, implementation, type, reflections));
 				}
-				
 			} else {
 				candidates.add(clazz);
 			}
