@@ -19,6 +19,7 @@ import org.jsondoc.core.util.JSONDocUtils;
 import org.jsondoc.springintegration.scanner.builder.*;
 import org.reflections.Reflections;
 import org.springframework.beans.BeanUtils;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -51,7 +52,6 @@ public abstract class AbstractSpringJSONDocScanner extends AbstractJSONDocScanne
 	public static Set<Class<?>> buildJSONDocObjectsCandidates(Set<Class<?>> candidates, Class<?> clazz, Type type, Reflections reflections) {
 
 		if (Map.class.isAssignableFrom(clazz)) {
-
 			if (type instanceof ParameterizedType) {
 				Type mapKeyType = ((ParameterizedType) type).getActualTypeArguments()[0];
 				Type mapValueType = ((ParameterizedType) type).getActualTypeArguments()[1];

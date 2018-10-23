@@ -17,7 +17,7 @@ public class Issue151Test {
 	
 	@Test
 	public void testIssue151() {
-		JSONDoc jsonDoc = jsondocScanner.getJSONDoc("version", "basePath", List.of("org.jsondoc.springmvc.issues.issue151"), true, MethodDisplay.URI);
+		JSONDoc jsonDoc = jsondocScanner.getJSONDoc("version", "basePath", List.of("org.jsondoc.springintegration.issues.issue151"), true, MethodDisplay.URI);
 		Assertions.assertEquals(2, jsonDoc.getObjects().keySet().size());
 		Assertions.assertEquals(1, jsonDoc.getObjects().get("bargroup").size());
 		Assertions.assertEquals(1, jsonDoc.getObjects().get("foogroup").size());

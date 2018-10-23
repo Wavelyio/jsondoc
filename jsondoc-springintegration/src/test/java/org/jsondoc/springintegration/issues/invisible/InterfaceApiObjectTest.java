@@ -18,7 +18,7 @@ public class InterfaceApiObjectTest {
 	
 	@Test
 	public void testInvisible() {
-		JSONDoc jsonDoc = jsondocScanner.getJSONDoc("version", "basePath", List.of("org.jsondoc.springmvc.issues.invisible"), true, MethodDisplay.URI);
+		JSONDoc jsonDoc = jsondocScanner.getJSONDoc("version", "basePath", List.of("org.jsondoc.springintegration.issues.invisible"), true, MethodDisplay.URI);
 		Assertions.assertEquals(1, jsonDoc.getObjects().keySet().size());
 		for (String string : jsonDoc.getObjects().keySet()) {
 			Assertions.assertEquals(2, jsonDoc.getObjects().get(string).size());
