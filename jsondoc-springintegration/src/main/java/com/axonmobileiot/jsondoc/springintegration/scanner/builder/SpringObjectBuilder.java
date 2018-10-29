@@ -3,7 +3,7 @@ package com.axonmobileiot.jsondoc.springintegration.scanner.builder;
 import com.axonmobileiot.jsondoc.core.pojo.ApiObjectDoc;
 import com.axonmobileiot.jsondoc.core.pojo.ApiObjectFieldDoc;
 import com.axonmobileiot.jsondoc.core.scanner.DefaultJSONDocScanner;
-import com.axonmobileiot.jsondoc.core.util.JSONDocHibernateValidatorProcessor;
+import com.axonmobileiot.jsondoc.core.util.JSONDocJavaXValidatorProcessor;
 import com.axonmobileiot.jsondoc.core.util.JSONDocType;
 import com.axonmobileiot.jsondoc.core.util.JSONDocTypeBuilder;
 
@@ -27,7 +27,7 @@ public class SpringObjectBuilder {
 			fieldDoc.setRequired(DefaultJSONDocScanner.UNDEFINED.toUpperCase());
 			fieldDoc.setJsondocType(JSONDocTypeBuilder.build(new JSONDocType(), field.getType(), field.getGenericType()));
 			
-			JSONDocHibernateValidatorProcessor.processHibernateValidatorAnnotations(field, fieldDoc);
+			JSONDocJavaXValidatorProcessor.processHibernateValidatorAnnotations(field, fieldDoc);
 			
 			fieldDocs.add(fieldDoc);
 		}

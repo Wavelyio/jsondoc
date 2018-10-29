@@ -3,7 +3,7 @@ package com.axonmobileiot.jsondoc.core.scanner.builder;
 import com.axonmobileiot.jsondoc.core.annotation.ApiObjectField;
 import com.axonmobileiot.jsondoc.core.pojo.ApiObjectFieldDoc;
 import com.axonmobileiot.jsondoc.core.scanner.DefaultJSONDocScanner;
-import com.axonmobileiot.jsondoc.core.util.JSONDocHibernateValidatorProcessor;
+import com.axonmobileiot.jsondoc.core.util.JSONDocJavaXValidatorProcessor;
 import com.axonmobileiot.jsondoc.core.util.JSONDocType;
 import com.axonmobileiot.jsondoc.core.util.JSONDocTypeBuilder;
 
@@ -33,7 +33,7 @@ public class JSONDocApiObjectFieldDocBuilder {
 			apiPojoFieldDoc.addFormat(annotation.format());
 		}
 		
-		JSONDocHibernateValidatorProcessor.processHibernateValidatorAnnotations(field, apiPojoFieldDoc);
+		JSONDocJavaXValidatorProcessor.processHibernateValidatorAnnotations(field, apiPojoFieldDoc);
 		
 		return apiPojoFieldDoc;
 	}

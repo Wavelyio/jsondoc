@@ -1,8 +1,7 @@
 module jsondoc.core {
     requires reflections;
     requires slf4j.api;
-    requires validation.api;
-    requires hibernate.validator;
+    requires java.validation;
 
     exports com.axonmobileiot.jsondoc.core.annotation.flow;
     exports com.axonmobileiot.jsondoc.core.annotation.global;

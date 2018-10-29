@@ -1,5 +1,4 @@
 module jsondoc.springboot.starter{
-    requires transitive jsondoc.core;
     requires transitive jsondoc.springintegration;
     requires spring.context;
     requires spring.beans;
