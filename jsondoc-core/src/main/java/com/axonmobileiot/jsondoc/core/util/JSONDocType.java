@@ -5,7 +5,7 @@ import java.util.List;
 
 public class JSONDocType {
 
-	private List<String> type = new LinkedList<String>();
+	private List<String> type = new LinkedList<>();
 
 	private JSONDocType mapKey;
 

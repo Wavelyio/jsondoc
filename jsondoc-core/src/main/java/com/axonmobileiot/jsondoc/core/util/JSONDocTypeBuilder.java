@@ -8,9 +8,9 @@ import java.util.Map;
 
 public class JSONDocTypeBuilder {
 	
-	private static final String WILDCARD = "wildcard";
-	private static final String UNDEFINED = "undefined";
-	private static final String ARRAY = "array";
+	private static final String WILDCARD = "Wildcard";
+	private static final String UNDEFINED = "Undefined";
+	private static final String ARRAY = "Array";
 
 	public static JSONDocType build(JSONDocType jsondocType, Class<?> clazz, Type type) {
 		if(clazz.isAssignableFrom(JSONDocDefaultType.class)) {
@@ -29,7 +29,7 @@ public class JSONDocTypeBuilder {
 				jsondocType.setMapValue(new JSONDocType());
 
 				if (mapKeyType instanceof Class) {
-					jsondocType.setMapKey(new JSONDocType(((Class<?>) mapKeyType).getSimpleName().toLowerCase()));
+					jsondocType.setMapKey(new JSONDocType(((Class<?>) mapKeyType).getSimpleName()));
 				} else if (mapKeyType instanceof WildcardType) {
 					jsondocType.setMapKey(new JSONDocType(WILDCARD));
 				}  else if(mapKeyType instanceof TypeVariable<?>){
@@ -39,7 +39,7 @@ public class JSONDocTypeBuilder {
 				}
 
 				if (mapValueType instanceof Class) {
-					jsondocType.setMapValue(new JSONDocType(((Class<?>) mapValueType).getSimpleName().toLowerCase()));
+					jsondocType.setMapValue(new JSONDocType(((Class<?>) mapValueType).getSimpleName()));
 				} else if (mapValueType instanceof WildcardType) {
 					jsondocType.setMapValue(new JSONDocType(WILDCARD));
 				} else if(mapValueType instanceof TypeVariable<?>){
@@ -99,12 +99,12 @@ public class JSONDocTypeBuilder {
 		if(clazz.isAnnotationPresent(ApiObject.class)) {
 			ApiObject annotation = clazz.getAnnotation(ApiObject.class);
 			if(annotation.name().isEmpty()) {
-				return clazz.getSimpleName().toLowerCase();
+				return clazz.getSimpleName();
 			} else {
 				return annotation.name();
 			}
 		} else {
-			return clazz.getSimpleName().toLowerCase();
+			return clazz.getSimpleName();
 		}
 	}
 

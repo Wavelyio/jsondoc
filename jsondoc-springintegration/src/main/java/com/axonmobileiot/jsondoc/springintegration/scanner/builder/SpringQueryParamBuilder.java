@@ -5,6 +5,7 @@ import com.axonmobileiot.jsondoc.core.pojo.ApiParamDoc;
 import com.axonmobileiot.jsondoc.core.util.JSONDocType;
 import com.axonmobileiot.jsondoc.core.util.JSONDocTypeBuilder;
 import com.axonmobileiot.jsondoc.springintegration.scanner.SpringBuilderUtils;
+import com.axonmobileiot.jsondoc.springintegration.scanner.constants.SupportedMappingConstants;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,7 +35,7 @@ public class SpringQueryParamBuilder {
 			addRequestMappingParamDoc(apiParamDocs, requestMapping);
 		}
 
-		if (SpringBuilderUtils.isAnnotated(method, RequestMapping.class)) {
+		if (SpringBuilderUtils.isAnnotatedWithAny(method, SupportedMappingConstants.mappingAnnotations)) {
 			RequestMapping requestMapping = SpringBuilderUtils.getAnnotation(method, RequestMapping.class);
 			addRequestMappingParamDoc(apiParamDocs, requestMapping);
 		}

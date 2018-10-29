@@ -61,8 +61,8 @@ public class PlainSpringJSONDocScannerTest {
 				Assertions.assertEquals("header-two", headerTwo.getName());
 				Assertions.assertEquals("header-test", headerTwo.getAllowedvalues()[0]);
 
-				Assertions.assertEquals("string", apiMethodDoc.getBodyobject().getJsondocType().getOneLineText());
-				Assertions.assertEquals("string", apiMethodDoc.getResponse().getJsondocType().getOneLineText());
+				Assertions.assertEquals("String", apiMethodDoc.getBodyobject().getJsondocType().getOneLineText());
+				Assertions.assertEquals("String", apiMethodDoc.getResponse().getJsondocType().getOneLineText());
 				Assertions.assertEquals("POST", apiMethodDoc.getVerb().iterator().next().name());
 				Assertions.assertEquals("application/json", apiMethodDoc.getProduces().iterator().next());
 				Assertions.assertEquals("application/json", apiMethodDoc.getConsumes().iterator().next());

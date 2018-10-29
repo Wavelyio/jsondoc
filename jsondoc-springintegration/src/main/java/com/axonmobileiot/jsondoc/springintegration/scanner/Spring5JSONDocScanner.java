@@ -1,5 +1,6 @@
 package com.axonmobileiot.jsondoc.springintegration.scanner;
 
+import com.axonmobileiot.jsondoc.springintegration.scanner.constants.SupportedMappingConstants;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,6 @@ public class Spring5JSONDocScanner extends AbstractSpringJSONDocScanner {
 
     @Override
     public Set<Class<? extends Annotation>> mappingAnnotations() {
-        return Set.of(RequestMapping.class, GetMapping.class, PostMapping.class, PatchMapping.class, PutMapping.class, DeleteMapping.class);
+        return SupportedMappingConstants.mappingAnnotations;
     }
 }

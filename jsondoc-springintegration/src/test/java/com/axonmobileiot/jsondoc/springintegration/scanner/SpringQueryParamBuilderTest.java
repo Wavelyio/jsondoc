@@ -9,10 +9,9 @@ import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import com.axonmobileiot.jsondoc.core.scanner.JSONDocScanner;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -114,6 +113,15 @@ public class SpringQueryParamBuilderTest {
 		}
 		
 	}
+
+	@RestController
+	@RequestMapping("test")
+	public class SpringController6 {
+		@GetMapping("hello/test")
+		public ResponseEntity<Boolean> testMethod(@RequestParam(name = "max") long max, @RequestParam(name = "sort") Boolean sort){
+			return ResponseEntity.ok(sort);
+		}
+	}
 	
 	@SuppressWarnings("unused")
 	@Test
@@ -163,7 +171,7 @@ public class SpringQueryParamBuilderTest {
 				ApiParamDoc queryParam = iterator.next();
 				Assertions.assertEquals("name", queryParam.getName());
 				Assertions.assertEquals("true", queryParam.getRequired());
-				Assertions.assertEquals("string", queryParam.getJsondocType().getOneLineText());
+				Assertions.assertEquals("String", queryParam.getJsondocType().getOneLineText());
 				Assertions.assertEquals("", queryParam.getDefaultvalue());
 			}
 			if (apiMethodDoc.getPath().contains("/param-two")) {
@@ -173,7 +181,7 @@ public class SpringQueryParamBuilderTest {
 				ApiParamDoc queryParam = iterator.next();
 				Assertions.assertEquals("name", queryParam.getName());
 				Assertions.assertEquals("false", queryParam.getRequired());
-				Assertions.assertEquals("string", queryParam.getJsondocType().getOneLineText());
+				Assertions.assertEquals("String", queryParam.getJsondocType().getOneLineText());
 				Assertions.assertEquals("test", queryParam.getDefaultvalue());
 			}
 			if (apiMethodDoc.getPath().contains("/param-three")) {
@@ -183,7 +191,7 @@ public class SpringQueryParamBuilderTest {
 				ApiParamDoc queryParam = iterator.next();
 				Assertions.assertEquals("", queryParam.getName());
 				Assertions.assertEquals("true", queryParam.getRequired());
-				Assertions.assertEquals("string", queryParam.getJsondocType().getOneLineText());
+				Assertions.assertEquals("String", queryParam.getJsondocType().getOneLineText());
 				Assertions.assertEquals("", queryParam.getDefaultvalue());
 			}
 			if (apiMethodDoc.getPath().contains("/param-four")) {
@@ -193,7 +201,7 @@ public class SpringQueryParamBuilderTest {
 				ApiParamDoc queryParam = iterator.next();
 				Assertions.assertEquals("value", queryParam.getName());
 				Assertions.assertEquals("false", queryParam.getRequired());
-				Assertions.assertEquals("string", queryParam.getJsondocType().getOneLineText());
+				Assertions.assertEquals("String", queryParam.getJsondocType().getOneLineText());
 				Assertions.assertEquals("", queryParam.getDefaultvalue());
 			}
 		}
@@ -220,10 +228,19 @@ public class SpringQueryParamBuilderTest {
 				Assertions.assertEquals(1, apiMethodDoc.getQueryparameters().size());
 				ApiParamDoc param = apiMethodDoc.getQueryparameters().iterator().next();
 				Assertions.assertEquals("modelAttributePojo", param.getName());
-				Assertions.assertEquals("modelattributepojo", param.getJsondocType().getOneLineText());
+				Assertions.assertEquals("ModelAttributePojo", param.getJsondocType().getOneLineText());
 			}
 		}
 		
 	}
 
+
+	@Test
+	public void testRetrieveOnSpecificMapping() {
+		ApiDoc apiDoc = jsondocScanner.getApiDocs(Set.of(SpringController6.class), MethodDisplay.URI).iterator().next();
+		Assertions.assertEquals("SpringController6", apiDoc.getName());
+		Assertions.assertEquals(1, apiDoc.getMethods().size());
+		var method = apiDoc.getMethods().iterator().next();
+		Assertions.assertEquals(2, method.getQueryparameters().size());
+	}
 }
