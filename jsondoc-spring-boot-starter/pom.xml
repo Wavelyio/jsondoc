@@ -47,7 +47,7 @@
 		<dependency>
 			<groupId>com.axonmobileiot.jsondoc</groupId>
 			<artifactId>jsondoc-springintegration</artifactId>
-			<version>1.2.20-SNAPSHOT</version>
+			<version>2.1.22-SNAPSHOT</version>
 		</dependency>
 
 	</dependencies>
