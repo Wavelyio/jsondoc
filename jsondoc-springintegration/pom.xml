@@ -6,7 +6,7 @@
 	<parent>
 		<artifactId>jsondoc-master</artifactId>
 		<groupId>com.axonmobileiot.jsondoc</groupId>
-		<version>1.2.20-SNAPSHOT</version>
+		<version>2.1.22-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
