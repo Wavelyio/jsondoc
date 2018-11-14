@@ -6,6 +6,7 @@ import com.axonmobileiot.jsondoc.core.util.JSONDocType;
 import com.axonmobileiot.jsondoc.core.util.JSONDocTypeBuilder;
 import com.axonmobileiot.jsondoc.springintegration.scanner.SpringBuilderUtils;
 import com.axonmobileiot.jsondoc.springintegration.scanner.constants.SupportedMappingConstants;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,11 +46,15 @@ public class SpringQueryParamBuilder {
 			RequestParam requestParam = null;
 			ModelAttribute modelAttribute = null;
 			ApiQueryParam apiQueryParam = null;
+			PageableDefault pageableDefault = null;
 			ApiParamDoc apiParamDoc = null;
 			
 			for (Annotation annotation : parametersAnnotations[i]) {
 				if (annotation instanceof RequestParam) {
 					requestParam = (RequestParam) annotation;
+				}
+				if (annotation instanceof PageableDefault) {
+					pageableDefault = (PageableDefault) annotation;
 				}
 				if(annotation instanceof ModelAttribute) {
 					modelAttribute = (ModelAttribute) annotation;
@@ -64,6 +69,10 @@ public class SpringQueryParamBuilder {
 				}
 				if(modelAttribute != null) {
 					apiParamDoc = new ApiParamDoc(modelAttribute.value(), "", JSONDocTypeBuilder.build(new JSONDocType(), method.getParameterTypes()[i], method.getGenericParameterTypes()[i]), "false", new String[] {}, null, null);
+					mergeApiQueryParamDoc(apiQueryParam, apiParamDoc);
+				}
+				if (pageableDefault != null) {
+					apiParamDoc = new ApiParamDoc("Pageable", "This will allow", JSONDocTypeBuilder.build(new JSONDocType(), method.getParameterTypes()[i], method.getGenericParameterTypes()[i]), "false", new String[] {"size, page, sort"}, null, "Size: " +pageableDefault.size());
 					mergeApiQueryParamDoc(apiQueryParam, apiParamDoc);
 				}
 				

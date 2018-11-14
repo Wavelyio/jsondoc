@@ -8,9 +8,9 @@ import java.util.Map;
 
 public class JSONDocTypeBuilder {
 	
-	private static final String WILDCARD = "Wildcard";
-	private static final String UNDEFINED = "Undefined";
-	private static final String ARRAY = "Array";
+	public static final String WILDCARD = "Wildcard";
+	public static final String UNDEFINED = "Undefined";
+	public static final String ARRAY = "Array";
 
 	public static JSONDocType build(JSONDocType jsondocType, Class<?> clazz, Type type) {
 		if(clazz.isAssignableFrom(JSONDocDefaultType.class)) {
@@ -19,7 +19,7 @@ public class JSONDocTypeBuilder {
 		}
 
 		if (Map.class.isAssignableFrom(clazz)) {
-			jsondocType.addItemToType(getCustomClassName(clazz));
+			jsondocType.addItemToType(JSONDocUtils.getCustomClassName(clazz));
 
 			if (type instanceof ParameterizedType) {
 				Type mapKeyType = ((ParameterizedType) type).getActualTypeArguments()[0];
@@ -53,10 +53,10 @@ public class JSONDocTypeBuilder {
 		} else if (Collection.class.isAssignableFrom(clazz)) {
 			if (type instanceof ParameterizedType) {
 				Type parametrizedType = ((ParameterizedType) type).getActualTypeArguments()[0];
-				jsondocType.addItemToType(getCustomClassName(clazz));
+				jsondocType.addItemToType(JSONDocUtils.getCustomClassName(clazz));
 				
 				if (parametrizedType instanceof Class) {
-					jsondocType.addItemToType(getCustomClassName((Class<?>) parametrizedType));
+					jsondocType.addItemToType(JSONDocUtils.getCustomClassName((Class<?>) parametrizedType));
 				} else if (parametrizedType instanceof WildcardType) {
 					jsondocType.addItemToType(WILDCARD);
 				} else if(parametrizedType instanceof TypeVariable<?>){
@@ -67,7 +67,7 @@ public class JSONDocTypeBuilder {
 			} else if (type instanceof GenericArrayType) {
 				return build(jsondocType, clazz, ((GenericArrayType) type).getGenericComponentType());
 			} else {
-				jsondocType.addItemToType(getCustomClassName(clazz));
+				jsondocType.addItemToType(JSONDocUtils.getCustomClassName(clazz));
 			}
 
 		} else if (clazz.isArray()) {
@@ -76,12 +76,12 @@ public class JSONDocTypeBuilder {
 			return build(jsondocType, componentType, type);
 
 		} else {
-			jsondocType.addItemToType(getCustomClassName(clazz));
+			jsondocType.addItemToType(JSONDocUtils.getCustomClassName(clazz));
 			if (type instanceof ParameterizedType) {
 				Type parametrizedType = ((ParameterizedType) type).getActualTypeArguments()[0];
 				
 				if (parametrizedType instanceof Class) {
-					jsondocType.addItemToType(getCustomClassName((Class<?>) parametrizedType));
+					jsondocType.addItemToType(JSONDocUtils.getCustomClassName((Class<?>) parametrizedType));
 				} else if (parametrizedType instanceof WildcardType) {
 					jsondocType.addItemToType(WILDCARD);
 				} else if(parametrizedType instanceof TypeVariable<?>){
@@ -94,18 +94,4 @@ public class JSONDocTypeBuilder {
 
 		return jsondocType;
 	}
-	
-	private static String getCustomClassName(Class<?> clazz) {
-		if(clazz.isAnnotationPresent(ApiObject.class)) {
-			ApiObject annotation = clazz.getAnnotation(ApiObject.class);
-			if(annotation.name().isEmpty()) {
-				return clazz.getSimpleName();
-			} else {
-				return annotation.name();
-			}
-		} else {
-			return clazz.getSimpleName();
-		}
-	}
-
 }

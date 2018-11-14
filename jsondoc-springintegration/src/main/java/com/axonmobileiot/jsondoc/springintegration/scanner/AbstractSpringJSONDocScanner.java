@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public abstract class AbstractSpringJSONDocScanner extends AbstractJSONDocScanner {
 
@@ -134,7 +135,9 @@ public abstract class AbstractSpringJSONDocScanner extends AbstractJSONDocScanne
 
 	@Override
 	public Set<Class<?>> jsondocObjects(List<String> packages) {
-		Set<Method> methodsAnnotatedWith = reflections.getMethodsAnnotatedWith(RequestMapping.class);
+
+		Set<Method> methodsAnnotatedWith = mappingAnnotations().stream().map(x -> reflections.getMethodsAnnotatedWith(x)).
+				flatMap(Collection::stream).collect(Collectors.toSet());
 		Set<Class<?>> candidates = new HashSet<>();
 		Set<Class<?>> subCandidates = new HashSet<>();
 		Set<Class<?>> elected = new HashSet<>();

@@ -4,6 +4,7 @@ import com.axonmobileiot.jsondoc.core.pojo.JSONDoc;
 import com.axonmobileiot.jsondoc.core.pojo.display.MethodDisplay;
 import com.axonmobileiot.jsondoc.core.scanner.JSONDocScanner;
 import com.axonmobileiot.jsondoc.springintegration.scanner.Spring5JSONDocScanner;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,7 @@ public class JSONDocController {
 		this.version = version;
 		this.basePath = basePath;
 		this.packages = packages;
+		this.packages.add(Page.class.getPackageName());
 		jsondocScanner = new Spring5JSONDocScanner();
 	}
 

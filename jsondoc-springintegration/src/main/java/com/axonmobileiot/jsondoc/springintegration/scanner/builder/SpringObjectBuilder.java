@@ -25,7 +25,7 @@ public class SpringObjectBuilder {
 			fieldDoc.setName(field.getName());
 			fieldDoc.setOrder(Integer.MAX_VALUE);
 			fieldDoc.setRequired(DefaultJSONDocScanner.UNDEFINED.toUpperCase());
-			fieldDoc.setJsondocType(JSONDocTypeBuilder.build(new JSONDocType(), field.getType(), field.getGenericType()));
+			fieldDoc.setJsondocType(SpringResponseBuilder.build(new JSONDocType(), field.getType(), field.getGenericType()));
 			
 			JSONDocJavaXValidatorProcessor.processHibernateValidatorAnnotations(field, fieldDoc);
 			

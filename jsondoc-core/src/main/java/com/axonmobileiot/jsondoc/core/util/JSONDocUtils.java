@@ -1,5 +1,7 @@
 package com.axonmobileiot.jsondoc.core.util;
 
+import com.axonmobileiot.jsondoc.core.annotation.ApiObject;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
@@ -15,6 +17,19 @@ public class JSONDocUtils {
 			}
 		}
 		return -1;
+	}
+
+	public static String getCustomClassName(Class<?> clazz) {
+		if(clazz.isAnnotationPresent(ApiObject.class)) {
+			ApiObject annotation = clazz.getAnnotation(ApiObject.class);
+			if(annotation.name().isEmpty()) {
+				return clazz.getSimpleName();
+			} else {
+				return annotation.name();
+			}
+		} else {
+			return clazz.getSimpleName();
+		}
 	}
 
 }

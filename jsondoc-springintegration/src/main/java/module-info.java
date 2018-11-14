@@ -5,6 +5,7 @@ module jsondoc.springintegration {
     requires spring.core;
     requires reflections;
     requires spring.beans;
+    requires spring.data.commons;
 
     exports com.axonmobileiot.jsondoc.springintegration.controller;
 }
