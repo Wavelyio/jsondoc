@@ -17,7 +17,7 @@ public class PageScannerTest {
 
     @Test
     public void scanControllerWithPage() {
-        Set<Class<?>> controllers = new LinkedHashSet<Class<?>>();
+        Set<Class<?>> controllers = new LinkedHashSet<>();
         controllers.add(PageScannerController.class);
         JSONDoc jsondoc = jsondocScanner.getJSONDoc("1.0", "http://localhost:8080/api", List.of("com.axonmobileiot.jsondoc.springintegration.scanner.page", Page.class.getPackage().getName()), true, MethodDisplay.URI);
         System.out.println("32523525");

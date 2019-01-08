@@ -22,7 +22,7 @@ import static java.lang.reflect.Modifier.isStatic;
 public class JSONDocTemplateBuilder {
 
 	private static final Logger log = LoggerFactory.getLogger(JSONDocTemplateBuilder.class);
-	private static final Map<Class<?>, Class<?>> primitives = new HashMap<Class<?>, Class<?>>();
+	private static final Map<Class<?>, Class<?>> primitives = new HashMap<>();
 
 	static {
 		primitives.put(boolean.class, Boolean.class);
@@ -80,7 +80,7 @@ public class JSONDocTemplateBuilder {
 			return getValue(wrap(fieldClass), null, fieldName, jsondocObjects);
 
 		} else if (Map.class.isAssignableFrom(fieldClass)) {
-			return new HashMap<Object, Object>();
+			return new HashMap<>();
 
 		} else if (Number.class.isAssignableFrom(fieldClass)) {
 			return new Integer(0);
@@ -92,7 +92,7 @@ public class JSONDocTemplateBuilder {
 			return new Boolean("true");
 
 		} else if (fieldClass.isArray() || Collection.class.isAssignableFrom(fieldClass)) {
-			return new ArrayList<Object>();
+			return new ArrayList<>();
 
 		} else {
 			return build(fieldClass, jsondocObjects);
@@ -101,9 +101,9 @@ public class JSONDocTemplateBuilder {
 	}
 
 	private static Set<JSONDocFieldWrapper> getAllDeclaredFields(Class<?> clazz) {
-		Set<JSONDocFieldWrapper> fields = new TreeSet<JSONDocFieldWrapper>();
+		Set<JSONDocFieldWrapper> fields = new TreeSet<>();
 		
-		List<Field> declaredFields = new ArrayList<Field>();
+		List<Field> declaredFields = new ArrayList<>();
 		if (clazz.isEnum()) {
 			return fields;
 		} else {

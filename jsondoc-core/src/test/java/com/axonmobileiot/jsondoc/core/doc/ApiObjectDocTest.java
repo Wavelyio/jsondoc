@@ -93,7 +93,7 @@ public class ApiObjectDocTest {
 	
 	@Test
 	public void testUndefinedVisibilityAndStageDoc() {
-		Set<Class<?>> classes = new HashSet<Class<?>>();
+		Set<Class<?>> classes = new HashSet<>();
 		classes.add(UndefinedVisibilityAndStage.class);
 		ApiObjectDoc apiObjectDoc = jsondocScanner.getApiObjectDocs(classes).iterator().next();
 		Assertions.assertEquals("UndefinedVisibilityAndStage", apiObjectDoc.getName());
@@ -103,7 +103,7 @@ public class ApiObjectDocTest {
 
 	@Test
 	public void testTemplateApiObjectDoc() {
-		Set<Class<?>> classes = new HashSet<Class<?>>();
+		Set<Class<?>> classes = new HashSet<>();
 		classes.add(TemplateApiObject.class);
 		ApiObjectDoc apiObjectDoc = jsondocScanner.getApiObjectDocs(classes).iterator().next();
 		Assertions.assertEquals("TemplateApiObject", apiObjectDoc.getName());
@@ -114,7 +114,7 @@ public class ApiObjectDocTest {
 	
 	@Test
 	public void testNoNameApiObjectDoc() {
-		Set<Class<?>> classes = new HashSet<Class<?>>();
+		Set<Class<?>> classes = new HashSet<>();
 		classes.add(NoNameApiObject.class);
 		ApiObjectDoc apiObjectDoc = jsondocScanner.getApiObjectDocs(classes).iterator().next();
 		Assertions.assertEquals("NoNameApiObject", apiObjectDoc.getName());
@@ -124,7 +124,7 @@ public class ApiObjectDocTest {
 	
 	@Test
 	public void testEnumObjectDoc() {
-		Set<Class<?>> classes = new HashSet<Class<?>>();
+		Set<Class<?>> classes = new HashSet<>();
 		classes.add(TestEnum.class);
 		ApiObjectDoc childDoc = jsondocScanner.getApiObjectDocs(classes).iterator().next();
 		Assertions.assertEquals("test-enum", childDoc.getName());
@@ -136,7 +136,7 @@ public class ApiObjectDocTest {
 	
 	@Test
 	public void testApiObjectDoc() {
-		Set<Class<?>> classes = new HashSet<Class<?>>();
+		Set<Class<?>> classes = new HashSet<>();
 		classes.add(TestObject.class);
 		ApiObjectDoc childDoc = jsondocScanner.getApiObjectDocs(classes).iterator().next();
 		Assertions.assertEquals("test-object", childDoc.getName());

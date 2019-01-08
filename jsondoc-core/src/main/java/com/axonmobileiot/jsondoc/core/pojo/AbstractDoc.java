@@ -10,9 +10,9 @@ public abstract class AbstractDoc {
 	protected List<String> jsondochints;
 	
 	public AbstractDoc() {
-		this.jsondocerrors = new ArrayList<String>();
-		this.jsondocwarnings = new ArrayList<String>();
-		this.jsondochints = new ArrayList<String>();
+		this.jsondocerrors = new ArrayList<>();
+		this.jsondocwarnings = new ArrayList<>();
+		this.jsondochints = new ArrayList<>();
 	}
 
 	public List<String> getJsondocerrors() {

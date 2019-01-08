@@ -24,7 +24,7 @@ public class JSONDocProperties {
 	 * The list of packages that JSONDoc will scan to look for annotated classes
 	 * to be documented.
 	 */
-	private List<String> packages = new ArrayList<String>();
+	private List<String> packages = new ArrayList<>();
 
 	/**
 	 * Whether the playground should be enabled in the UI or not. Defaults to

@@ -43,7 +43,7 @@ public class JSONDocSpringJSONDocScannerTest {
 	
 	@Test
 	public void testMergeApiDoc() {
-		Set<Class<?>> controllers = new LinkedHashSet<Class<?>>();
+		Set<Class<?>> controllers = new LinkedHashSet<>();
 		controllers.add(SpringController.class);
 		Set<ApiDoc> apiDocs = jsondocScanner.getApiDocs(controllers, MethodDisplay.URI);
 		

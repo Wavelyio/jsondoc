@@ -243,7 +243,7 @@ public abstract class AbstractJSONDocScanner implements JSONDocScanner {
 	}
 	
 	public Map<String, Set<ApiFlowDoc>> getApiFlowDocsMap(Set<Class<?>> classes, List<ApiMethodDoc> apiMethodDocs) {
-		Map<String, Set<ApiFlowDoc>> apiFlowDocsMap = new TreeMap<String, Set<ApiFlowDoc>>();
+		Map<String, Set<ApiFlowDoc>> apiFlowDocsMap = new TreeMap<>();
 		Set<ApiFlowDoc> apiFlowDocSet = getApiFlowDocs(classes, apiMethodDocs);
 		for (ApiFlowDoc apiFlowDoc : apiFlowDocSet) {
 			if(apiFlowDocsMap.containsKey(apiFlowDoc.getGroup())) {
